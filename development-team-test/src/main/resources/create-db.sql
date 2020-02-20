@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS projects;
 DROP TABLE IF EXISTS developers;
 
 
-CREATE TABLE projects (
+   CREATE TABLE projects (
   projectId INT NOT NULL AUTO_INCREMENT,
   description VARCHAR(255) NOT NULL ,
   dateAdded DATE,

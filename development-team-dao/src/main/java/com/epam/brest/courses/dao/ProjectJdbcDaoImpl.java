@@ -52,14 +52,16 @@ public class ProjectJdbcDaoImpl implements ProjectsDao {
         return null;
     }
 
-    public class ProjectRowMapper implements RowMapper<Projects>{
+
+
+  private class ProjectRowMapper implements RowMapper<Projects>{
 
         @Override
         public Projects mapRow(ResultSet rs, int rowNum) throws SQLException {
             Projects project = new Projects();
-            project.setProjectId(rs.getInt("projectId"));
-            project.setDescription(rs.getString("description"));
-            project.setDateAdded(rs.getDate("dateAdded"));
+            project.setProjectId(rs.getInt("PROJECTID"));
+            project.setDescription(rs.getString("DESCRIPTION"));
+            project.setDateAdded(rs.getDate("DATEADDED"));
             return project;
         }
     }
