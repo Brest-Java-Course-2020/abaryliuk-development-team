@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface ProjectsDao {
     List<Projects> getAllProjects();
-    void getProjectById(Integer id);
+    Projects getProjectById(Integer id);
     void updateProjectById(Integer id);
     void createProject();
     void deleteProjectById(Integer id);
-    Integer getNumberOfDevelopersBetweenDates(Date dateStart, Date dateEnd);
+    Integer getProjectsBetweenDates(Date dateStart, Date dateEnd);
 
 
 }

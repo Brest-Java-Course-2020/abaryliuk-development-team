@@ -26,6 +26,8 @@ class ProjectJdbcDaoImplTest {
 
     @Test
     void getProjectById() {
+        Projects projects = projectsDao.getProjectById(1);
+        assertNotNull(projects);
     }
 
     @Test
