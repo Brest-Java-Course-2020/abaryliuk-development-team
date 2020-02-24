@@ -3,6 +3,7 @@ package com.epam.brest.courses.dao;
 import com.epam.brest.courses.model.Projects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -23,34 +24,60 @@ public class ProjectJdbcDaoImpl implements ProjectsDao {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
+    @Value("${PRO.sqlGetAllProjects}")
+    private String sqlGetAllProjects;
+
+    @Value("${PRO.sqlAdd}")
+    private String sqlAdd;
+
+    @Value("${PRO.sqlUpdate}")
+    private String sqlUpdate;
+
+    @Value("${PRO.sqlCountById}")
+    private String sqlCountById;
+
+    @Value("${PRO.sqlCountByName}")
+    private String sqlCountByName;
+
+    @Value("${PRO.sqlGetProjectById}")
+    private String sqlGetProjectById;
+
+    @Value("${PRO.sqlDeleteById}")
+    private String sqlDeleteById;
+
+    MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+
+
     @Override
     public List<Projects> getAllProjects() {
 
         List<Projects> projectsList = namedParameterJdbcTemplate.
-                query("SELECT projectId, description, dateAdded FROM projects p ORDER BY p.projectId",
-                new BeanPropertyRowMapper<>(Projects.class));
+                query(sqlGetAllProjects, new BeanPropertyRowMapper<>(Projects.class));
 
         return projectsList;
     }
 
+
     @Override
     public Projects getProjectById(Integer projectId) {
 
-        MapSqlParameterSource mapSqlParameterSource =
-                            new MapSqlParameterSource("projectId", projectId);
+        parameterSource.addValue("projectId", projectId);
 
         Projects projects = (Projects) namedParameterJdbcTemplate
-                            .query("SELECT * FROM projects WHERE projectId = :projectId", mapSqlParameterSource,
+                            .query(sqlGetProjectById, parameterSource,
                             new BeanPropertyRowMapper<>(Projects.class)).stream().findAny().orElse(null);
-
-        LOGGER.debug("ProjectId=:   " + projects.getProjectId()) ;
+        LOGGER.debug("Test ProjectId=:   " + projects.getProjectId()) ;
 
         return projects;
     }
 
 
     @Override
-    public void updateProjectById(Integer id) {
+    public void updateProject(Projects project) {
+        LOGGER.debug("Date = :      " + project.getDateAdded());
+        parameterSource.addValue("description", project.getDescription());
+        parameterSource.addValue("dateAdded", project.getDateAdded());
+        namedParameterJdbcTemplate.update(sqlUpdate, parameterSource);
 
     }
 

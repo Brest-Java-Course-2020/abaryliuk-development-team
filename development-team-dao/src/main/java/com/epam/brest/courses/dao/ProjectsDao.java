@@ -8,7 +8,7 @@ import java.util.List;
 public interface ProjectsDao {
     List<Projects> getAllProjects();
     Projects getProjectById(Integer id);
-    void updateProjectById(Integer id);
+    void updateProject(Projects project);
     void createProject();
     void deleteProjectById(Integer id);
     Integer getProjectsBetweenDates(Date dateStart, Date dateEnd);

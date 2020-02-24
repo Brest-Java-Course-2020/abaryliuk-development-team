@@ -7,7 +7,12 @@
        http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="classpath:development-team.properties"/>
+        <property name="locations">
+            <list>
+                <value>classpath:development-team.properties</value>
+                <value>classpath:sql-development-team.properties</value>
+            </list>
+        </property>
     </bean>
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">

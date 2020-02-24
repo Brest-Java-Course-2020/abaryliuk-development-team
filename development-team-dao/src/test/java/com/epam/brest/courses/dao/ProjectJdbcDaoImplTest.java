@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,7 +32,15 @@ class ProjectJdbcDaoImplTest {
     }
 
     @Test
-    void updateProjectById() {
+    void updateProject() {
+        Projects project = projectsDao.getProjectById(2);
+        Date checkDate = new Date();
+        project.setDescription("New");
+        project.setDateAdded(checkDate);
+
+        projectsDao.updateProject(project);
+        assertTrue(project.getDescription().equals("New"));
+        assertTrue(project.getDateAdded().equals(checkDate));
     }
 
     @Test
