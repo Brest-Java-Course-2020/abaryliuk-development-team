@@ -1,7 +1,12 @@
 package com.epam.brest.courses.model;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.util.Date;
 
+
+@SuppressFBWarnings(value = { "EI_EXPOSE_REP", "EI_EXPOSE_REP2" }
+, justification = "I prefer to suppress these FindBugs warnings")
 public class Projects {
 
     private Integer projectId;
@@ -36,10 +41,11 @@ public class Projects {
 
     @Override
     public String toString() {
-        return "Project{" +
-                "progectId=" + projectId +
-                ", description='" + description + '\'' +
-                ", dateAdded=" + dateAdded +
-                '}';
+        return "Project{"
+                + "progectId=" + projectId
+                + ", description='" + description + '\''
+                + ", dateAdded=" + dateAdded
+                + '}';
     }
+
 }

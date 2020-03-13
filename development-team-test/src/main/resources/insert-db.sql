@@ -2,38 +2,37 @@ set foreign_key_checks=0;
 
 
 INSERT INTO projects
-VALUES (DEFAULT, 'Create a web application based on SpringJDBC', '2019-07-15');
+VALUES (1, 'Create a web application based on SpringJDBC', '2019-07-15');
 
 INSERT INTO projects
-VALUES (DEFAULT, 'Create a web application based on SpringBoot','2019-08-13');
+VALUES (2, 'Create a web application based on SpringBoot','2019-08-13');
 
 INSERT INTO projects
-VALUES (DEFAULT, 'Create a web application based on Hibernate', '2020-01-17');
-
-
-INSERT INTO developers
-VALUES (DEFAULT, 'Ivan', 'Ivanov');
+VALUES (3, 'Create a web application based on Hibernate', '2020-01-17');
 
 INSERT INTO developers
-VALUES (DEFAULT, 'Petr', 'Petrov');
+VALUES (4, 'Ivan', 'Ivanov');
 
 INSERT INTO developers
-VALUES (DEFAULT, 'Sergey', 'Ivanov');
+VALUES (5, 'Petr', 'Petrov');
 
 INSERT INTO developers
-VALUES (DEFAULT, 'Mike', 'Djonson');
+VALUES (6, 'Sergey', 'Ivanov');
 
 INSERT INTO developers
-VALUES (DEFAULT, 'Artem', 'Lopata');
+VALUES (7, 'Mike', 'Djonson');
 
 INSERT INTO developers
-VALUES (DEFAULT,'Astra', 'Mironova');
+VALUES (8, 'Artem', 'Lopata');
 
 INSERT INTO developers
-VALUES (DEFAULT, 'Zlata', 'Maximochkina');
+VALUES (9,'Astra', 'Mironova');
 
 INSERT INTO developers
-VALUES (DEFAULT, 'Daria', 'Lihacheva');
+VALUES (10, 'Zlata', 'Maximochkina');
+
+INSERT INTO developers
+VALUES (11, 'Daria', 'Lihacheva');
 
 INSERT INTO projects_developers
 VALUES (1, 1);
