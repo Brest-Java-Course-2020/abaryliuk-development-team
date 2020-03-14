@@ -345,9 +345,9 @@
                     <execution>
                         <id>validate</id>
                         <phase>validate</phase>
-<!--                        <inherited>false</inherited>-->
+                        <inherited>false</inherited>
                         <configuration>
-                            <!--<configLocation>checkstyle.xml</configLocation>-->
+<!--                            <configLocation>checkstyle.xml</configLocation>-->
                             <encoding>UTF-8</encoding>
                             <consoleOutput>true</consoleOutput>
                             <failsOnError>false</failsOnError>
