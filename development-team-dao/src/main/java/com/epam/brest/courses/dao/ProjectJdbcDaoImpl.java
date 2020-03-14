@@ -4,15 +4,16 @@ import com.epam.brest.courses.model.Projects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public class ProjectJdbcDaoImpl implements ProjectsDao {
 
@@ -33,11 +34,8 @@ public class ProjectJdbcDaoImpl implements ProjectsDao {
     @Value("${PRO.sqlUpdate}")
     private String sqlUpdate;
 
-    @Value("${PRO.sqlCountById}")
-    private String sqlCountById;
-
-    @Value("${PRO.sqlCountByName}")
-    private String sqlCountByName;
+//    @Value("${PRO.sqlCountById}")
+//    private String sqlCountById;
 
     @Value("${PRO.sqlGetProjectById}")
     private String sqlGetProjectById;
@@ -49,7 +47,7 @@ public class ProjectJdbcDaoImpl implements ProjectsDao {
 
 
     @Override
-    public List<Projects> getAllProjects() {
+    public List<Projects> findAll() {
 
         List<Projects> projectsList = namedParameterJdbcTemplate.
                 query(sqlGetAllProjects, new BeanPropertyRowMapper<>(Projects.class));
@@ -59,40 +57,54 @@ public class ProjectJdbcDaoImpl implements ProjectsDao {
 
 
     @Override
-    public Projects getProjectById(Integer projectId) {
+    public Optional<Projects> findById(Integer projectId) {
 
         parameterSource.addValue("projectId", projectId);
 
-        Projects projects = (Projects) namedParameterJdbcTemplate
+        List<Projects> projects =  namedParameterJdbcTemplate
                             .query(sqlGetProjectById, parameterSource,
-                            new BeanPropertyRowMapper<>(Projects.class)).stream().findAny().orElse(null);
-        LOGGER.debug("Test ProjectId=:   " + projects.getProjectId()) ;
+                            new BeanPropertyRowMapper<>(Projects.class));
+        LOGGER.debug("Test Project size=:   " + projects.size()) ;
 
-        return projects;
+        return Optional.ofNullable(DataAccessUtils.uniqueResult(projects));
     }
 
 
     @Override
-    public void updateProject(Projects project) {
+    public Integer update(Projects project) {
+
         LOGGER.debug("Date = :      " + project.getDateAdded());
         parameterSource.addValue("description", project.getDescription());
         parameterSource.addValue("dateAdded", project.getDateAdded());
-        namedParameterJdbcTemplate.update(sqlUpdate, parameterSource);
-
+        return namedParameterJdbcTemplate.update(sqlUpdate, parameterSource);
     }
 
     @Override
-    public void createProject() {
+    public Integer create(Projects project) {
 
+        LOGGER.debug("Create new project {}", project);
+        parameterSource.addValue("projectId", project.getProjectId());
+        parameterSource.addValue("description", project.getDescription());
+        parameterSource.addValue("dateAdded", project.getDateAdded());
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        namedParameterJdbcTemplate.update(sqlAdd,parameterSource,keyHolder);
+
+    return keyHolder.getKey().intValue();
     }
 
     @Override
-    public void deleteProjectById(Integer id) {
+    public Integer delete(Integer projectId) {
 
+        LOGGER.debug("Delete project by id {}", projectId);
+        parameterSource.addValue("projectId", projectId);
+
+    return namedParameterJdbcTemplate.update(sqlDeleteById,parameterSource);
     }
 
     @Override
-    public Integer getProjectsBetweenDates(Date dateStart, Date dateEnd) {
+    public List<Projects> findBetweenDates(Date dateStart, Date dateEnd) {
+
         return null;
     }
 

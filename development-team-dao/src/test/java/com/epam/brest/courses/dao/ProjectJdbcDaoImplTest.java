@@ -9,6 +9,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,24 +22,34 @@ class ProjectJdbcDaoImplTest {
 
     @Test
     void getAllProjects() {
-        List<Projects> projects = projectsDao.getAllProjects();
+        List<Projects> projects = projectsDao.findAll();
        assertNotNull(projects);
     }
 
     @Test
     void getProjectById() {
-        Projects projects = projectsDao.getProjectById(1);
-        assertNotNull(projects);
+        Projects project = new Projects();
+        project.setDescription("Test");
+        Integer id = projectsDao.create(project);
+        Optional<Projects> projectOptional = projectsDao.findById(id);
+
+        assertTrue(projectOptional.isPresent());
+        assertNotNull(projectOptional.get().getDescription());
+        assertEquals(projectOptional.get().getProjectId(), id);
+        assertEquals(projectOptional.get().getDescription(), "Test");
     }
 
     @Test
     void updateProject() {
-        Projects project = projectsDao.getProjectById(2);
+        Projects project = new Projects();
+        project.setDescription("Test");
+        Integer id =projectsDao.create(project);
+
         Date checkDate = new Date();
         project.setDescription("New");
         project.setDateAdded(checkDate);
 
-        projectsDao.updateProject(project);
+        projectsDao.update(project);
         assertTrue(project.getDescription().equals("New"));
         assertTrue(project.getDateAdded().equals(checkDate));
     }

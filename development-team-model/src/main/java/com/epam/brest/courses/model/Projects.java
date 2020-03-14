@@ -4,9 +4,11 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import java.util.Date;
 
-
+/**
+ * Projects
+ */
 @SuppressFBWarnings(value = { "EI_EXPOSE_REP", "EI_EXPOSE_REP2" }
-, justification = "I prefer to suppress these FindBugs warnings")
+                    , justification = "I prefer to suppress these FindBugs warnings")
 public class Projects {
 
     private Integer projectId;

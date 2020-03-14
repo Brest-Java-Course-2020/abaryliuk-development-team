@@ -1,18 +1,14 @@
 package com.epam.brest.courses.model;
 
+/**
+ * Developers
+ */
 public class Developers {
+
     private Integer developerId;
     private String firstName;
     private String lastName;
 
-    @Override
-    public String toString() {
-        return "Developers{" +
-                "developerId=" + developerId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
-    }
 
     public Integer getDeveloperId() {
         return developerId;
@@ -36,5 +32,14 @@ public class Developers {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    @Override
+    public String toString() {
+        return "Developers{"
+                + "developerId=" + developerId
+                + ", firstName='" + firstName + '\''
+                + ", lastName='" + lastName + '\''
+                + '}';
     }
 }

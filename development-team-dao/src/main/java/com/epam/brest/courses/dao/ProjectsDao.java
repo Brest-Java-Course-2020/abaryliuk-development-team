@@ -4,14 +4,15 @@ import com.epam.brest.courses.model.Projects;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public interface ProjectsDao {
-    List<Projects> getAllProjects();
-    Projects getProjectById(Integer id);
-    void updateProject(Projects project);
-    void createProject();
-    void deleteProjectById(Integer id);
-    Integer getProjectsBetweenDates(Date dateStart, Date dateEnd);
+    List<Projects> findAll();
+    Optional<Projects> findById(Integer id);
+    Integer update(Projects project);
+    Integer create(Projects project);
+    Integer delete(Integer id);
+    List<Projects> findBetweenDates(Date dateStart, Date dateEnd);
 
 
 }
