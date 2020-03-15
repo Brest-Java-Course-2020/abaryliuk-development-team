@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProjectJdbcDaoImplTest {
 
     @Autowired
-    private ProjectsDao projectsDao;
+    private ProjectsJdbcDao projectsDao;
 
     Projects project = new Projects();
 

@@ -1,6 +1,6 @@
 package com.epam.brest.courses.daoImpl;
 
-import com.epam.brest.courses.dao.ProjectsDao;
+import com.epam.brest.courses.dao.ProjectsJdbcDao;
 import com.epam.brest.courses.model.Projects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,11 +12,10 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-public class ProjectJdbcDaoImpl implements ProjectsDao {
+public class ProjectJdbcDaoImpl implements ProjectsJdbcDao {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProjectJdbcDaoImpl.class);
 
@@ -97,12 +96,6 @@ public class ProjectJdbcDaoImpl implements ProjectsDao {
         parameterSource.addValue("projectId", projectId);
 
     return namedParameterJdbcTemplate.update(sqlDeleteById,parameterSource);
-    }
-
-    @Override
-    public List<Projects> findBetweenDates(Date dateStart, Date dateEnd) {
-
-        return null;
     }
 
 }

@@ -1,14 +1,13 @@
 package com.epam.brest.courses.dao;
 
 import com.epam.brest.courses.model.Projects;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 /**
- * ProjectsDao interface.
+ * ProjectsJdbcDao interface.
  */
-public interface ProjectsDao {
+public interface ProjectsJdbcDao {
 
     /**
      * Find all projects.
@@ -49,13 +48,6 @@ public interface ProjectsDao {
      */
     Integer delete(Integer projectId);
 
-    /**
-     * Find all projects between two dates.
-     *
-     * @param dateStart
-     * @param dateEnd
-     * @return projects list.
-     */
-    List<Projects> findBetweenDates(Date dateStart, Date dateEnd);
+
 
 }
