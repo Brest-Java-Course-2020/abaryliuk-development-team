@@ -1,5 +1,6 @@
-package com.epam.brest.courses.dao;
+package com.epam.brest.courses.daoImpl;
 
+import com.epam.brest.courses.dao.ProjectsDao;
 import com.epam.brest.courses.model.Projects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,9 +34,6 @@ public class ProjectJdbcDaoImpl implements ProjectsDao {
 
     @Value("${PRO.sqlUpdate}")
     private String sqlUpdate;
-
-//    @Value("${PRO.sqlCountById}")
-//    private String sqlCountById;
 
     @Value("${PRO.sqlGetProjectById}")
     private String sqlGetProjectById;
@@ -83,7 +81,6 @@ public class ProjectJdbcDaoImpl implements ProjectsDao {
     public Integer create(Projects project) {
 
         LOGGER.debug("Create new project {}", project);
-        parameterSource.addValue("projectId", project.getProjectId());
         parameterSource.addValue("description", project.getDescription());
         parameterSource.addValue("dateAdded", project.getDateAdded());
 

@@ -20,15 +20,18 @@ class ProjectJdbcDaoImplTest {
     @Autowired
     private ProjectsDao projectsDao;
 
+    Projects project = new Projects();
+
     @Test
-    void getAllProjects() {
+    void shouldGetAllProjects() {
+
         List<Projects> projects = projectsDao.findAll();
        assertNotNull(projects);
     }
 
     @Test
-    void getProjectById() {
-        Projects project = new Projects();
+    void shouldGetProjectById() {
+
         project.setDescription("Test");
         Integer id = projectsDao.create(project);
         Optional<Projects> projectOptional = projectsDao.findById(id);
@@ -40,8 +43,8 @@ class ProjectJdbcDaoImplTest {
     }
 
     @Test
-    void updateProject() {
-        Projects project = new Projects();
+    void shouldUpdateProject() {
+
         project.setDescription("Test");
         Integer id =projectsDao.create(project);
 
@@ -55,12 +58,25 @@ class ProjectJdbcDaoImplTest {
     }
 
     @Test
-    void createProject() {
+    void shouldCreateProject() {
+
+        project.setDescription("Test");
+        Date date = project.getDateAdded();
+        Integer id = projectsDao.create(project);
+        assertEquals(projectsDao.findById(id).get().getDescription(),"Test");
+        assertEquals(projectsDao.findById(id).get().getDateAdded(), date);
     }
 
     @Test
-    void deleteProjectById() {
+    void shouldDeleteProjectById() {
+
+        project.setDescription("Test");
+        Integer id = projectsDao.create(project);
+        assertTrue(projectsDao.findById(id).isPresent());
+        projectsDao.delete(id);
+        assertFalse(projectsDao.findById(id).isPresent());
     }
+
 
     @Test
     void getNumberOfDevelopersBetweenDates() {
