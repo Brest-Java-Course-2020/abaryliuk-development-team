@@ -1,5 +1,4 @@
-
-/**
- * Model.
- */
-package com.epam.brest.courses.model;
+    /**
+     * Model.
+     */
+    package com.epam.brest.courses.model;

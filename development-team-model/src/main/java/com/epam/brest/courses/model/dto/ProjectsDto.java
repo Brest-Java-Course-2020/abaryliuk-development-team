@@ -1,16 +1,11 @@
-package com.epam.brest.courses.model;
+package com.epam.brest.courses.model.dto;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-
-import java.util.Date;
+import javax.xml.crypto.Data;
 
 /**
- * Projects.
+ * POJO Projects for model.
  */
-@SuppressFBWarnings(value = { "EI_EXPOSE_REP", "EI_EXPOSE_REP2" }
-                    , justification = "I prefer to suppress these FindBugs warnings")
-public class Projects {
-
+public class ProjectsDto {
 
     /**
      * Project id.
@@ -25,13 +20,23 @@ public class Projects {
     /**
      * Date adding of project.
      */
-    private Date dateAdded;
+    private Data dateAdded;
 
+    /**
+     * Count of developers.
+     */
+    private Integer countOfDevelopers;
+
+    /**
+     * Constructor without arguments.
+     */
+    public ProjectsDto() {
+    }
 
     /**
      * Returns <code>Integer</code> representation of this projectId.
-     *
-     * @return projectId Project Id.
+     *      *
+     *      * @return projectId Project Id.
      */
     public final Integer getProjectId() {
         return projectId;
@@ -42,9 +47,9 @@ public class Projects {
      *
      * @param projectId Department Id.
      */
-    public final Projects setProjectId(Integer projectId) {
+
+    public final void setProjectId(final Integer projectId) {
         this.projectId = projectId;
-        return this;
     }
 
     /**
@@ -56,15 +61,13 @@ public class Projects {
         return description;
     }
 
-
     /**
      * Sets the description.
      *
      * @param description Project description.
      */
-    public final Projects setDescription(String description) {
+    public final void setDescription(final String description) {
         this.description = description;
-        return this;
     }
 
     /**
@@ -72,7 +75,7 @@ public class Projects {
      *
      * @return dateAdded Project add date.
      */
-    public final Date getDateAdded() {
+    public final Data getDateAdded() {
         return dateAdded;
     }
 
@@ -81,9 +84,26 @@ public class Projects {
      *
      * @param dateAdded Project add date.
      */
-    public Projects setDateAdded(Date dateAdded) {
+    public void setDateAdded(Data dateAdded) {
         this.dateAdded = dateAdded;
-        return this;
+    }
+
+    /**
+     * Returns <code>Integer</code> representation project's count of developers.
+     *
+     * @return countOfDevelopers Project's count of developers.
+     */
+    public final Integer getCountOfDevelopers() {
+        return countOfDevelopers;
+    }
+
+    /**
+     * Sets the project's count of developers.
+     *
+     * @param countOfDevelopers Count of developers.
+     */
+    public final void setCountOfDevelopers(final Integer countOfDevelopers) {
+        this.countOfDevelopers = countOfDevelopers;
     }
 
     /**
@@ -91,11 +111,11 @@ public class Projects {
      */
     @Override
     public final String toString() {
-        return "Project{"
-                + "progectId=" + projectId
+        return "ProjectsDto{"
+                + "projectId=" + projectId
                 + ", description='" + description + '\''
                 + ", dateAdded=" + dateAdded
+                + ", countOfDevelopers=" + countOfDevelopers
                 + '}';
     }
-
 }
