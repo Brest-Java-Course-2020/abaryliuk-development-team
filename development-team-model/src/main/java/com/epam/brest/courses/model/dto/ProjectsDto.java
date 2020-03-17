@@ -1,6 +1,6 @@
 package com.epam.brest.courses.model.dto;
 
-import javax.xml.crypto.Data;
+import java.util.Date;
 
 /**
  * POJO Projects for model.
@@ -20,7 +20,7 @@ public class ProjectsDto {
     /**
      * Date adding of project.
      */
-    private Data dateAdded;
+    private Date dateAdded;
 
     /**
      * Count of developers.
@@ -75,7 +75,7 @@ public class ProjectsDto {
      *
      * @return dateAdded Project add date.
      */
-    public final Data getDateAdded() {
+    public final Date getDateAdded() {
         return dateAdded;
     }
 
@@ -84,7 +84,7 @@ public class ProjectsDto {
      *
      * @param dateAdded Project add date.
      */
-    public void setDateAdded(Data dateAdded) {
+    public void setDateAdded(Date dateAdded) {
         this.dateAdded = dateAdded;
     }
 

@@ -1,4 +1,4 @@
-package com.epam.brest.courses.daoImpl;
+package com.epam.brest.courses.daoDto;
 
 import com.epam.brest.courses.dao.ProjectsJdbcDao;
 import com.epam.brest.courses.model.Projects;
