@@ -13,7 +13,6 @@
         <module>development-team-dao</module>
         <module>development-team-model</module>
         <module>development-team-test</module>
-
     </modules>
 
 
@@ -34,21 +33,20 @@
         <dependencies>
             <dependency>
                 <groupId>com.epam.brest.courses</groupId>
-                <artifactId>department-management-model</artifactId>
+                <artifactId>development-team-model</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.epam.brest.courses</groupId>
-                <artifactId>department-management-dao</artifactId>
+                <artifactId>development-team-dao</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.epam.brest.courses</groupId>
-                <artifactId>department-management-test</artifactId>
+                <artifactId>development-team-test</artifactId>
                 <version>${project.version}</version>
-                <scope>test</scope>
             </dependency>
 
             <dependency>

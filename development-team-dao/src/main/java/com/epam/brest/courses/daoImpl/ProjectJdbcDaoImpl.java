@@ -1,4 +1,4 @@
-package com.epam.brest.courses.daoDto;
+package com.epam.brest.courses.daoImpl;
 
 import com.epam.brest.courses.dao.ProjectsJdbcDao;
 import com.epam.brest.courses.model.Projects;
@@ -79,13 +79,13 @@ public class ProjectJdbcDaoImpl implements ProjectsJdbcDao {
     @Override
     public Integer create(Projects project) {
 
-        LOGGER.debug("Create new project {}", project);
         parameterSource.addValue("description", project.getDescription());
         parameterSource.addValue("dateAdded", project.getDateAdded());
+        LOGGER.debug("Create new project {}", project);
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(sqlAdd,parameterSource,keyHolder);
-
+        LOGGER.debug("Date {}", project.getDateAdded());
     return keyHolder.getKey().intValue();
     }
 

@@ -12,6 +12,12 @@ import java.util.Date;
                     , justification = "I prefer to suppress these FindBugs warnings")
 public class Projects {
 
+    public Projects() {
+    }
+
+    public Projects(Date dateAdded) {
+        this.dateAdded=dateAdded;
+    }
 
     /**
      * Project id.
@@ -78,14 +84,8 @@ public class Projects {
         return dateAdded;
     }
 
-    /**
-     * Sets the dateAdded.
-     *
-     * @param dateAdded Project add date.
-     */
-    public Projects setDateAdded(Date dateAdded) {
+    public void setDateAdded(Date dateAdded) {
         this.dateAdded = dateAdded;
-        return this;
     }
 
     /**

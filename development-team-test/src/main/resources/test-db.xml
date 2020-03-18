@@ -6,13 +6,13 @@
        http://www.springframework.org/schema/jdbc
        http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
-    <bean id="projectDto" class="com.epam.brest.courses.model.dto.ProjectsDto" scope="prototype">
+    <bean id="projectsDto" class="com.epam.brest.courses.model.dto.ProjectsDto" scope="prototype">
         <constructor-arg>
             <bean class="java.util.Date"/>
         </constructor-arg>
     </bean>
 
-    <bean id="project" class="com.epam.brest.courses.model.Projects" scope="prototype">
+    <bean id="projects" class="com.epam.brest.courses.model.Projects" scope="prototype">
         <constructor-arg>
             <bean class="java.util.Date"/>
         </constructor-arg>

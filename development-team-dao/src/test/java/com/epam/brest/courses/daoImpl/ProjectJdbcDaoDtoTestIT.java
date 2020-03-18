@@ -1,7 +1,8 @@
-package com.epam.brest.courses.daoDto;
+package com.epam.brest.courses.daoImpl;
 
 import com.epam.brest.courses.model.Projects;
 import com.epam.brest.courses.model.dto.ProjectsDto;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,15 +10,16 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static com.epam.brest.courses.model.constants.ProjectConstants.PROJECT_DESCRIPTION_SIZE;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-dao.xml"})
-class ProjectJdbcDaoDtoImplTestIT {
+class ProjectJdbcDaoDtoTestIT {
 
     @Autowired
     ProjectJdbcDaoDtoImpl projectJdbcDaoDto;
@@ -25,27 +27,35 @@ class ProjectJdbcDaoDtoImplTestIT {
     @Autowired
     ProjectJdbcDaoImpl projectJdbcDao;
 
+    @Autowired
+    Projects project;
 
     @Test
     void shouldFindBetweenDates() throws ParseException {
 
-        SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date dateStart = myFormat.parse("2019-07-16");
-        Date dateEnd = myFormat.parse("2020-01-16");
+        Calendar c = Calendar.getInstance();
+            Date dateStart = new Date();
+            c.setTime(dateStart);
+            c.add(Calendar.DATE, -2);
+            dateStart = c.getTime();
+                Date dateEnd = new Date();
+                c.setTime(dateEnd);
+                c.add(Calendar.DATE, 2);
+                dateEnd = c.getTime();
 
-        Projects projectStart = new Projects();
-        projectStart.setDateAdded(dateStart);
-        projectStart.setDescription("Test");
-        projectJdbcDao.create(projectStart);
 
-        Projects projectEnd = new Projects();
-        projectEnd.setDateAdded(dateEnd);
-        projectEnd.setDescription("TestEnd");
+        Projects projectStart = project;
+        projectStart.setDescription(RandomStringUtils.randomAlphabetic(PROJECT_DESCRIPTION_SIZE));
+        Integer idStart = projectJdbcDao.create(projectStart);
+            assertTrue(idStart > 0);
 
-        projectJdbcDao.create(projectEnd);
+        Projects projectEnd = project;
+        projectEnd.setDescription(RandomStringUtils.randomAlphabetic(PROJECT_DESCRIPTION_SIZE));
+        Integer idEnd = projectJdbcDao.create(projectEnd);
+            assertTrue(idEnd > 0);
 
         List<ProjectsDto> projectsList = projectJdbcDaoDto.findBetweenDates(dateStart,dateEnd);
-        assertEquals(3, projectsList.size());
+            assertTrue(projectsList.size() > 0);
 
     }
 

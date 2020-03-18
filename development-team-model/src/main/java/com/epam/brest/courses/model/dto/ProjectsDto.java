@@ -1,10 +1,15 @@
 package com.epam.brest.courses.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.util.Date;
 
 /**
  * POJO Projects for model.
  */
+@SuppressFBWarnings(value = { "EI_EXPOSE_REP", "EI_EXPOSE_REP2" }
+        , justification = "I prefer to suppress these FindBugs warnings")
 public class ProjectsDto {
 
     /**
@@ -31,6 +36,7 @@ public class ProjectsDto {
      * Constructor without arguments.
      */
     public ProjectsDto() {
+        this.dateAdded = new Date();
     }
 
     /**
@@ -75,17 +81,9 @@ public class ProjectsDto {
      *
      * @return dateAdded Project add date.
      */
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     public final Date getDateAdded() {
         return dateAdded;
-    }
-
-    /**
-     * Sets the dateAdded.
-     *
-     * @param dateAdded Project add date.
-     */
-    public void setDateAdded(Date dateAdded) {
-        this.dateAdded = dateAdded;
     }
 
     /**
