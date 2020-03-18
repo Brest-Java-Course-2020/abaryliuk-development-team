@@ -1,6 +1,5 @@
 package com.epam.brest.courses.dao;
 
-import com.epam.brest.courses.model.Projects;
 import com.epam.brest.courses.model.dto.ProjectsDto;
 
 import java.util.Date;
@@ -9,7 +8,7 @@ import java.util.List;
 /**
  * ProjectsJdbcDaoDto interface.
  */
-public interface ProjectJdbcDaoDto {
+public interface ProjectsJdbcDaoDto {
 
     /**
      * Find all projects between two dates.

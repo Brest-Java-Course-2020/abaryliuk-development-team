@@ -4,6 +4,21 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <bean id="projectsDto" class="com.epam.brest.courses.model.dto.ProjectsDto" scope="prototype">
+        <constructor-arg>
+            <bean class="java.util.Date"/>
+        </constructor-arg>
+    </bean>
+
+    <bean id="projects" class="com.epam.brest.courses.model.Projects" scope="prototype">
+        <constructor-arg>
+            <bean class="java.util.Date"/>
+        </constructor-arg>
+    </bean>
+
+    <bean id="developersDao" class="com.epam.brest.courses.daoImpl.DevelopersJdbcDaoImpl">
+        <constructor-arg ref="jdbcTemplate"/>
+    </bean>
 
     <bean id="projectsDaoDto" class="com.epam.brest.courses.daoImpl.ProjectJdbcDaoDtoImpl">
         <constructor-arg ref="jdbcTemplate"/>

@@ -2,7 +2,6 @@ package com.epam.brest.courses.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-
 import java.util.Date;
 
 /**

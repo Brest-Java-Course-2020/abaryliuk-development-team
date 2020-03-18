@@ -17,7 +17,7 @@ public interface ProjectsJdbcDao {
     List<Projects> findAll();
 
     /**
-     * Find department by Id.
+     * Find project by Id.
      *
      * @param projectId project's id.
      * @return project.
@@ -36,14 +36,14 @@ public interface ProjectsJdbcDao {
      * Persist new project.
      *
      * @param project project.
-     * @return persisted project id.
+     * @return persisted project's id.
      */
     Integer create(Projects project);
 
     /**
      * Delete project.
      *
-     * @param projectId project id.
+     * @param projectId project's id.
      * @return number of updated records in the database.
      */
     Integer delete(Integer projectId);

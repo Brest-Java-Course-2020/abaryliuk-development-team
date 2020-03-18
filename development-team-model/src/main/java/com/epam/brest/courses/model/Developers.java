@@ -79,7 +79,7 @@ public class Developers {
     /**
      * Returns <code>String</code> representation of this description.
      *
-     * @return description Project description.
+     * @return description Developer's description.
      */
     @Override
     public final String toString() {

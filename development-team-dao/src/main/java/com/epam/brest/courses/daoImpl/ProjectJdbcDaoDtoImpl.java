@@ -1,6 +1,6 @@
 package com.epam.brest.courses.daoImpl;
 
-import com.epam.brest.courses.dao.ProjectJdbcDaoDto;
+import com.epam.brest.courses.dao.ProjectsJdbcDaoDto;
 import com.epam.brest.courses.model.dto.ProjectsDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +12,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import java.util.Date;
 import java.util.List;
 
-public class ProjectJdbcDaoDtoImpl implements ProjectJdbcDaoDto {
+public class ProjectJdbcDaoDtoImpl implements ProjectsJdbcDaoDto {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProjectJdbcDaoDtoImpl.class);
 
