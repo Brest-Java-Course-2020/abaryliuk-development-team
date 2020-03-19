@@ -15,6 +15,8 @@ import org.springframework.jdbc.support.KeyHolder;
 import java.util.List;
 import java.util.Optional;
 
+import static com.epam.brest.courses.model.constants.ProjectConstants.*;
+
 public class ProjectJdbcDaoImpl implements ProjectsJdbcDao {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProjectJdbcDaoImpl.class);
@@ -42,7 +44,6 @@ public class ProjectJdbcDaoImpl implements ProjectsJdbcDao {
 
     MapSqlParameterSource parameterSource = new MapSqlParameterSource();
 
-
     @Override
     public List<Projects> findAll() {
 
@@ -56,7 +57,7 @@ public class ProjectJdbcDaoImpl implements ProjectsJdbcDao {
     @Override
     public Optional<Projects> findById(Integer projectId) {
 
-        parameterSource.addValue("projectId", projectId);
+        parameterSource.addValue(PROJECT_ID, projectId);
 
         List<Projects> projects =  namedParameterJdbcTemplate
                             .query(sqlGetProjectById, parameterSource,
@@ -71,16 +72,16 @@ public class ProjectJdbcDaoImpl implements ProjectsJdbcDao {
     public Integer update(Projects project) {
 
         LOGGER.debug("Date = :      " + project.getDateAdded());
-        parameterSource.addValue("description", project.getDescription());
-        parameterSource.addValue("dateAdded", project.getDateAdded());
+        parameterSource.addValue(DESCRIPTION, project.getDescription());
+        parameterSource.addValue(DATEADDED, project.getDateAdded());
         return namedParameterJdbcTemplate.update(sqlUpdate, parameterSource);
     }
 
     @Override
     public Integer create(Projects project) {
 
-        parameterSource.addValue("description", project.getDescription());
-        parameterSource.addValue("dateAdded", project.getDateAdded());
+        parameterSource.addValue(DESCRIPTION, project.getDescription());
+        parameterSource.addValue(DATEADDED, project.getDateAdded());
         LOGGER.debug("Create new project {}", project);
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -93,7 +94,7 @@ public class ProjectJdbcDaoImpl implements ProjectsJdbcDao {
     public Integer delete(Integer projectId) {
 
         LOGGER.debug("Delete project by id {}", projectId);
-        parameterSource.addValue("projectId", projectId);
+        parameterSource.addValue(PROJECT_ID, projectId);
 
     return namedParameterJdbcTemplate.update(sqlDeleteById,parameterSource);
     }

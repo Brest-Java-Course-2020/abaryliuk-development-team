@@ -15,6 +15,8 @@ import org.springframework.jdbc.support.KeyHolder;
 import java.util.List;
 import java.util.Optional;
 
+import static com.epam.brest.courses.model.constants.DeveloperConstants.*;
+
 public class DevelopersJdbcDaoImpl implements DevelopersJdbcDao {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DevelopersJdbcDaoImpl.class);
@@ -54,7 +56,7 @@ public class DevelopersJdbcDaoImpl implements DevelopersJdbcDao {
     public Optional<Developers> findById(Integer developerId) {
 
         LOGGER.debug("FindById developerId = {}", developerId);
-        parameterSource.addValue("developerId", developerId);
+        parameterSource.addValue(DEVELOPER_ID, developerId);
         List<Developers> developersList = namedParameterJdbcTemplate
                 .query(sqlGetDeveloperById,parameterSource,new BeanPropertyRowMapper<>(Developers.class));
         return Optional.ofNullable(DataAccessUtils.uniqueResult(developersList));
@@ -64,8 +66,8 @@ public class DevelopersJdbcDaoImpl implements DevelopersJdbcDao {
     public Integer create(Developers developer) {
 
         LOGGER.debug("Create developer = {} ", developer);
-        parameterSource.addValue("lastName", developer.getLastName());
-        parameterSource.addValue("firstName", developer.getFirstName());
+        parameterSource.addValue(LASTNAME, developer.getLastName());
+        parameterSource.addValue(FIRSTNAME, developer.getFirstName());
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(sqlAdd, parameterSource, keyHolder);
@@ -76,9 +78,9 @@ public class DevelopersJdbcDaoImpl implements DevelopersJdbcDao {
     public Integer update(Developers developer) {
 
         LOGGER.debug("Update developer = {}", developer);
-        parameterSource.addValue("developerId", developer.getDeveloperId());
-        parameterSource.addValue("firstName", developer.getFirstName());
-        parameterSource.addValue("lastName", developer.getLastName());
+        parameterSource.addValue(DEVELOPER_ID, developer.getDeveloperId());
+        parameterSource.addValue(FIRSTNAME, developer.getFirstName());
+        parameterSource.addValue(LASTNAME, developer.getLastName());
         int result = namedParameterJdbcTemplate.update(sqlUpdate, parameterSource);
 
         LOGGER.debug("Result = {}", result);
@@ -89,7 +91,7 @@ public class DevelopersJdbcDaoImpl implements DevelopersJdbcDao {
     public Integer delete(Integer developerId) {
 
         LOGGER.debug("Delete developerId = {}", developerId);
-        parameterSource.addValue("developerId", developerId);
+        parameterSource.addValue(DEVELOPER_ID, developerId);
        Integer result =  namedParameterJdbcTemplate.update(sqlDeleteById,parameterSource);
 
         return result;
