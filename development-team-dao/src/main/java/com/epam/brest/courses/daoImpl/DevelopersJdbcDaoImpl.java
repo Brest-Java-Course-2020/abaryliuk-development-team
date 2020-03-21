@@ -9,7 +9,6 @@ import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
 import java.util.List;
@@ -26,7 +25,9 @@ public class DevelopersJdbcDaoImpl implements DevelopersJdbcDao {
     public DevelopersJdbcDaoImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
+
     MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+    GeneratedKeyHolderFactory keyHolderFactory = new GeneratedKeyHolderFactory();
 
     @Value("${DEV.sqlGetAllDevelopers}")
     private String sqlGetAllDevelopers;
@@ -35,7 +36,7 @@ public class DevelopersJdbcDaoImpl implements DevelopersJdbcDao {
     private String sqlGetDeveloperById;
 
     @Value("${DEV.sqlAdd}")
-    private String sqlAdd;
+    private String  sqlAdd;
 
     @Value("${DEV.sqlUpdate}")
     private String sqlUpdate;
@@ -69,9 +70,10 @@ public class DevelopersJdbcDaoImpl implements DevelopersJdbcDao {
         parameterSource.addValue(LASTNAME, developer.getLastName());
         parameterSource.addValue(FIRSTNAME, developer.getFirstName());
 
-        KeyHolder keyHolder = new GeneratedKeyHolder();
+        KeyHolder keyHolder = keyHolderFactory.newKeyHolder();
+
         namedParameterJdbcTemplate.update(sqlAdd, parameterSource, keyHolder);
-        return keyHolder.getKey().intValue();
+        return  keyHolder.getKey().intValue();
     }
 
     @Override

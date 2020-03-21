@@ -13,6 +13,8 @@
         <module>development-team-dao</module>
         <module>development-team-model</module>
         <module>development-team-test</module>
+        <module>development-team-service-api</module>
+        <module>development-team-service</module>
     </modules>
 
 
@@ -46,6 +48,18 @@
             <dependency>
                 <groupId>com.epam.brest.courses</groupId>
                 <artifactId>development-team-test</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.epam.brest.courses</groupId>
+                <artifactId>development-team-service-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.epam.brest.courses</groupId>
+                <artifactId>development-team-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

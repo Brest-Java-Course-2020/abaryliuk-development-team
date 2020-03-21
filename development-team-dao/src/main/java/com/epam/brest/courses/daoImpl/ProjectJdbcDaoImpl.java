@@ -47,6 +47,7 @@ public class ProjectJdbcDaoImpl implements ProjectsJdbcDao {
     @Override
     public List<Projects> findAll() {
 
+        LOGGER.debug("fidAll()");
         List<Projects> projectsList = namedParameterJdbcTemplate.
                 query(sqlGetAllProjects, new BeanPropertyRowMapper<>(Projects.class));
 
@@ -62,7 +63,7 @@ public class ProjectJdbcDaoImpl implements ProjectsJdbcDao {
         List<Projects> projects =  namedParameterJdbcTemplate
                             .query(sqlGetProjectById, parameterSource,
                             new BeanPropertyRowMapper<>(Projects.class));
-        LOGGER.debug("Test Project size=:   " + projects.size()) ;
+        LOGGER.debug("List of projects - size=:  {} ", projects.size()) ;
 
         return Optional.ofNullable(DataAccessUtils.uniqueResult(projects));
     }

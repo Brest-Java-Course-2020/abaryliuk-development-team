@@ -1,13 +1,14 @@
-package com.epam.brest.courses.dao;
+package com.epam.brest.courses.service;
 
 import com.epam.brest.courses.model.Projects;
+
 import java.util.List;
 import java.util.Optional;
 
 /**
- * ProjectsJdbcDao interface.
+ * ProjectsService interface.
  */
-public interface ProjectsJdbcDao {
+public interface ProjectsService {
 
     /**
      * Find all projects.
