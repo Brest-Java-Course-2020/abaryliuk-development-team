@@ -86,7 +86,9 @@ class ProjectJdbcDaoTestIT {
         String description = projectTest.getDescription();
         Integer id = projectsDao.create(projectTest);
         assertEquals(description, projectsDao.findById(id).get().getDescription());
+
         assertEquals(date, projectsDao.findById(id).get().getDateAdded());
+        System.out.println("DateAdded_________________________" + projectsDao.findById(id).get().getDateAdded());
         assertNotNull(id);
     }
 

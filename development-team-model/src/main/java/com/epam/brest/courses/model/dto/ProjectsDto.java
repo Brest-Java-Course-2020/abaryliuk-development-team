@@ -12,15 +12,11 @@ import java.util.Date;
         , justification = "I prefer to suppress these FindBugs warnings")
 public class ProjectsDto {
 
+
     /**
      * Project id.
      */
     private Integer projectId;
-
-    /**
-     * Project description.
-     */
-    private String description;
 
     /**
      * Date adding of project.
@@ -32,14 +28,7 @@ public class ProjectsDto {
      */
     private Integer countOfDevelopers;
 
-    /**
-     * Constructor without arguments.
-     */
-    public ProjectsDto() {
-        this.dateAdded = new Date();
-    }
-
-    /**
+     /**
      * Returns <code>Integer</code> representation of this projectId.
      *      *
      *      * @return projectId Project Id.
@@ -51,29 +40,15 @@ public class ProjectsDto {
     /**
      * Sets the department's identifier.
      *
-     * @param projectId Department Id.
+     * @param projectId Project Id.
      */
-
     public final void setProjectId(final Integer projectId) {
         this.projectId = projectId;
     }
 
-    /**
-     * Returns <code>String</code> representation of this description.
-     *
-     * @return description Project description.
-     */
-    public final String getDescription() {
-        return description;
-    }
-
-    /**
-     * Sets the description.
-     *
-     * @param description Project description.
-     */
-    public final void setDescription(final String description) {
-        this.description = description;
+    public ProjectsDto setDateAdded(Date dateAdded) {
+        this.dateAdded = dateAdded;
+        return this;
     }
 
     /**
@@ -111,7 +86,7 @@ public class ProjectsDto {
     public final String toString() {
         return "ProjectsDto{"
                 + "projectId=" + projectId
-                + ", description='" + description + '\''
+//                + ", description='" + description + '\''
                 + ", dateAdded=" + dateAdded
                 + ", countOfDevelopers=" + countOfDevelopers
                 + '}';

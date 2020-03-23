@@ -21,6 +21,12 @@ public class Developers {
     private String lastName;
 
     /**
+     * Constructor without arguments.
+     */
+    public Developers() {
+    }
+
+    /**
      * Returns <code>Integer</code> representation of this developer's id.
      *
      * @return developerId Developer's id.

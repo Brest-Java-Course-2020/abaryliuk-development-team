@@ -15,6 +15,7 @@
         <module>development-team-test</module>
         <module>development-team-service-api</module>
         <module>development-team-service</module>
+        <module>development-team-rest-app</module>
     </modules>
 
 
@@ -60,6 +61,12 @@
             <dependency>
                 <groupId>com.epam.brest.courses</groupId>
                 <artifactId>development-team-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.epam.brest.courses</groupId>
+                <artifactId>development-team-rest-app</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

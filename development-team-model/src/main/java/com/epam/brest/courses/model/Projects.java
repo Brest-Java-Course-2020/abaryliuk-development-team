@@ -11,9 +11,15 @@ import java.util.Date;
                     , justification = "I prefer to suppress these FindBugs warnings")
 public class Projects {
 
+    /**
+     * Constructor without arguments.
+     */
     public Projects() {
     }
 
+    /**
+     * Constructor with argument dateAdded.
+     */
     public Projects(Date dateAdded) {
         this.dateAdded=dateAdded;
     }
@@ -83,8 +89,14 @@ public class Projects {
         return dateAdded;
     }
 
-    public void setDateAdded(Date dateAdded) {
+    /**
+     * Sets the dateAdded.
+     *
+     * @param dateAdded eAdded Project dateAdded.
+     */
+    public Projects setDateAdded(Date dateAdded) {
         this.dateAdded = dateAdded;
+        return this;
     }
 
     /**
