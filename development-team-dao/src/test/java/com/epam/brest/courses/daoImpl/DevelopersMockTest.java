@@ -1,10 +1,9 @@
 package com.epam.brest.courses.daoImpl;
 
-import com.epam.brest.courses.dao.DevelopersJdbcDao;
 import com.epam.brest.courses.dao.KeyHolderFactory;
 import com.epam.brest.courses.model.Developers;
 import org.junit.Assert;
-import org.junit.Before;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

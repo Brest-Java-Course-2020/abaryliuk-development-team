@@ -2,6 +2,7 @@ package com.epam.brest.courses.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -19,8 +20,14 @@ public class ProjectsDto {
     private Integer projectId;
 
     /**
+     * Project description.
+     */
+    private String description;
+
+    /**
      * Date adding of project.
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateAdded;
 
     /**
@@ -60,7 +67,25 @@ public class ProjectsDto {
     public final Date getDateAdded() {
         return dateAdded;
     }
+    /**
+     * Returns <code>String</code> representation of this description.
+     *
+     * @return description Project description.
+     */
+    public final String getDescription() {
+        return description;
+    }
 
+
+    /**
+     * Sets the description.
+     *
+     * @param description Project description.
+     */
+    public final ProjectsDto setDescription(String description) {
+        this.description = description;
+        return this;
+    }
     /**
      * Returns <code>Integer</code> representation project's count of developers.
      *
@@ -86,7 +111,7 @@ public class ProjectsDto {
     public final String toString() {
         return "ProjectsDto{"
                 + "projectId=" + projectId
-//                + ", description='" + description + '\''
+                + ", description='" + description + '\''
                 + ", dateAdded=" + dateAdded
                 + ", countOfDevelopers=" + countOfDevelopers
                 + '}';

@@ -2,6 +2,8 @@ package com.epam.brest.courses.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -37,6 +39,7 @@ public class Projects {
     /**
      * Date adding of project.
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateAdded;
 
 
