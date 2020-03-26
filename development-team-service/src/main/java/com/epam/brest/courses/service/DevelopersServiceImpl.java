@@ -57,4 +57,24 @@ public class DevelopersServiceImpl implements DevelopersService {
         LOGGER.debug("delete() developerId = {}", developerId );
         return developersJdbcDao.delete(developerId);
     }
+
+    @Override
+    public List<Developers> selectDevelopersFromProjects_Developers(Integer projectId) {
+
+        LOGGER.debug("SERVICE selectDevelopersFromProjects_Developers(). Project id = {}", projectId);
+        return developersJdbcDao.selectDevelopersFromProjects_Developers(projectId);
+    }
+
+    @Override
+    public Integer addDeveloperToProjects_Developers(Integer projectId, Integer developerId) {
+
+        LOGGER.debug("SERVICE addDeveloperToProjects_Developers(). Project id = {}, Developer id = {}", projectId, developerId);
+        return developersJdbcDao.addDeveloperToProjects_Developers(projectId,developerId);
+    }
+
+    @Override
+    public Integer deleteDeveloperFromProject_Developers(Integer developerId) {
+        LOGGER.debug("SERVICE deleteDeveloperFromProject_Developers(). Developer id = {}", developerId);
+        return developersJdbcDao.deleteDeveloperFromProject_Developers(developerId);
+    }
 }

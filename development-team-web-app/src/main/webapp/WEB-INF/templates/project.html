@@ -110,11 +110,71 @@
         </div>
     </div>
 </section>
+<section id="developers">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th>FirstName</th>
+                                <th>LastName</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="developer : ${developers}">
+                                    <td th:text="${developer.firstName}">Vasy</td>
+                                    <td th:date="${developer.lastName}">Sidorov</td>
+                                        <td class="text-right">
+                                            <span data-toggle="modal"
+                                                  data-target="#deleteDialog"
+                                                  th:attr="data-id=${developer.developerId}">
+                                                            <a href="#" class="btn-sm btn-outline-secondary"
+                                                               title="delete project"
+                                                               data-toggle="tooltip"
+                                                               data-placement="top">
+                                                                <i class="fa fa-remove"></i>
+                                                                <span class="d-none d-md-inline">Delete</span></a>
+                                            </span>
+                                        </td>
+                                </tr>
+                            </tbody>
 
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <footer>
     <hr/>
     <p class="text-center">&copy; 2020</p>
 </footer>
+
+<div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <h5 class="modal-title" id="exampleModalLabel">Delete developer from project</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Please confirm delete
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <a id="deleteUrl" href="#" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="../../resources/static/js/jquery-3.4.1.slim.min.js"
         th:src="@{/resources/static/js/jquery-3.4.1.slim.min.js}"></script>
@@ -123,6 +183,16 @@
 <script src="../../resources/static/js/bootstrap.min.js"
         th:src="@{/resources/static/js/bootstrap.min.js}"></script>
 <script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+<script>
+    $('#deleteDialog').on('show.bs.modal', function (event) {
+        var target = $(event.relatedTarget)
+        $(this).find('.modal-body').text('Please confirm delete developer from project: "' + target.data('id') + '"')
+        document.getElementById('deleteUrl').href = '/projects/' + target.data('id') + '/delete' + '/from';
+    })
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })

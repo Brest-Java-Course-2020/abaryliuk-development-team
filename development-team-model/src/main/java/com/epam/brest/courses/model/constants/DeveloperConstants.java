@@ -30,4 +30,8 @@ package com.epam.brest.courses.model.constants;
          */
         public static final int FIRSTNAME_SIZE = 10;
 
+        /**
+         * Developer's LASTNAME_SIZE.
+         */
+        public static final int LASTNAME_SIZE = 10;
     }

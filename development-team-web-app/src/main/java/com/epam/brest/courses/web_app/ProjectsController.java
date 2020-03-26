@@ -7,13 +7,16 @@ import com.epam.brest.courses.web_app.validators.ProjectsValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.text.ParseException;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
@@ -49,22 +52,19 @@ public class ProjectsController {
      * @return view name
      */
     @GetMapping
-    public final String projects(@RequestParam (value = "dateStart", required = false) String dateStart,
-                                 @RequestParam (value = "dateEnd", required = false) String dateEnd,
-                                 Model model) throws ParseException {
-
-    System.out.println(dateStart);
-    System.out.println(dateEnd);
+    public final String projects(@DateTimeFormat(pattern = "yyyy-MM-dd")
+                                 @RequestParam (value = "dateStart", required = false) Date dateStart,
+                                 @RequestParam (value = "dateEnd", required = false) Date dateEnd,
+                                 Model model){
 
      if (dateStart!= null && dateEnd != null){
-         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-         Date dateStartDate = formatter.parse(dateStart);
-         Date dateEndDate = formatter.parse(dateEnd);
-         LOGGER.debug("IFprojects()");
-         model.addAttribute("projects", projectsDtoService.findBetweenDates(dateStartDate, dateEndDate));
+
+         LOGGER.debug("Find projects between dates. Date start = {}, Date End = {}", dateStart, dateEnd);
+         model.addAttribute("projects", projectsDtoService.findBetweenDates(dateStart, dateEnd));
     }
     else{
-         LOGGER.debug("ELSEprojects()");
+
+         LOGGER.debug("Find all projects");
          model.addAttribute("projects", projectsDtoService.countOfDevelopers());
     }
 
@@ -85,7 +85,6 @@ public class ProjectsController {
         if (optionalProjects.isPresent()) {
             model.addAttribute("isNew", false);
             model.addAttribute("project", optionalProjects.get());
-            System.out.println("Date : " + optionalProjects.get().getDateAdded());
             return "project";
         } else {
             // TODO department not found - pass error message as parameter or handle not found error
@@ -163,5 +162,11 @@ public class ProjectsController {
         return "redirect:/projects";
     }
 
+    @InitBinder
+    public void initBinder(WebDataBinder webDataBinder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+        webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+    }
 
 }
