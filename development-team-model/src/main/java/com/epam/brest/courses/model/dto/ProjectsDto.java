@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * POJO Projects for model.
@@ -27,8 +27,8 @@ public class ProjectsDto {
     /**
      * Date adding of project.
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dateAdded;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate dateAdded;
 
     /**
      * Count of developers.
@@ -53,7 +53,7 @@ public class ProjectsDto {
         this.projectId = projectId;
     }
 
-    public ProjectsDto setDateAdded(Date dateAdded) {
+    public ProjectsDto setDateAdded(LocalDate dateAdded) {
         this.dateAdded = dateAdded;
         return this;
     }
@@ -64,7 +64,7 @@ public class ProjectsDto {
      * @return dateAdded Project add date.
      */
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    public final Date getDateAdded() {
+    public final LocalDate getDateAdded() {
         return dateAdded;
     }
     /**

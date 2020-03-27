@@ -7,9 +7,7 @@
     <bean id="projectsDto" class="com.epam.brest.courses.model.dto.ProjectsDto" />
 
     <bean id="projects" class="com.epam.brest.courses.model.Projects" scope="prototype">
-        <constructor-arg>
-            <bean class="java.util.Date"/>
-        </constructor-arg>
+
     </bean>
 
     <bean id="developersDao" class="com.epam.brest.courses.daoImpl.DevelopersJdbcDaoImpl">

@@ -2,7 +2,7 @@ package com.epam.brest.courses.dao;
 
 import com.epam.brest.courses.model.dto.ProjectsDto;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -17,7 +17,7 @@ public interface ProjectsJdbcDaoDto {
      * @param dateEnd
      * @return project's list.
      */
-    List<ProjectsDto> findBetweenDates(Date dateStart, Date dateEnd);
+    List<ProjectsDto> findBetweenDates(LocalDate dateStart, LocalDate dateEnd);
 
     /**
      * Count of developers

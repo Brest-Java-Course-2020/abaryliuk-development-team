@@ -9,7 +9,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 import java.util.List;
 
 public class ProjectJdbcDaoDtoImpl implements ProjectsJdbcDaoDto {
@@ -31,7 +32,7 @@ public class ProjectJdbcDaoDtoImpl implements ProjectsJdbcDaoDto {
     private String countOfDevelopers;
 
     @Override
-    public List<ProjectsDto> findBetweenDates(Date dateStart, Date dateEnd) {
+    public List<ProjectsDto> findBetweenDates(LocalDate dateStart, LocalDate dateEnd) {
 
     LOGGER.debug("findBetweenDates. DateStart = {} DateEnd = {}", dateStart,dateEnd);
 

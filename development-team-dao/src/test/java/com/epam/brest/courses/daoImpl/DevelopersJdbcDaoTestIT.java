@@ -147,7 +147,7 @@ class DevelopersJdbcDaoTestIT {
         assertEquals(1, developersList.size());
         assertEquals(0, resultFirst.intValue());
 
-        Integer resultAfterDelete = developersJdbcDao.deleteDeveloperFromProject_Developers(developerId);
+        Integer resultAfterDelete = developersJdbcDao.deleteDeveloperFromProject_Developers(projectId, developerId);
         List<Developers> developersListAfterDelete = developersJdbcDao.selectDevelopersFromProjects_Developers(projectId);
         assertEquals(0, developersListAfterDelete.size());
         assertEquals(1, resultAfterDelete.intValue());

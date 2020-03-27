@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -23,7 +23,7 @@ public class ProjectsDtoServiceImpl implements ProjectsDtoService {
     }
 
     @Override
-    public List<ProjectsDto> findBetweenDates(Date dateStart, Date dateEnd) {
+    public List<ProjectsDto> findBetweenDates(LocalDate dateStart, LocalDate dateEnd) {
 
         LOGGER.debug("Find project between dates - findBetweenDates");
         return projectsJdbcDaoDto.findBetweenDates(dateStart,dateEnd);
@@ -33,6 +33,7 @@ public class ProjectsDtoServiceImpl implements ProjectsDtoService {
     public List<ProjectsDto> countOfDevelopers() {
 
         LOGGER.debug("Count of developers - countOfDevelopers()");
+
         return projectsJdbcDaoDto.countOfDevelopers();
     }
 }

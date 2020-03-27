@@ -166,7 +166,7 @@ class DevelopersServiceImplIT {
             assertEquals(1, developersList.size());
             assertEquals(0, result.intValue());
 
-        Integer resultAfterDelete = developersService.deleteDeveloperFromProject_Developers(developerId);
+        Integer resultAfterDelete = developersService.deleteDeveloperFromProject_Developers(projectId, developerId);
         List<Developers> developersListAfterDelete = developersService.selectDevelopersFromProjects_Developers(projectId);
             assertEquals(0, developersListAfterDelete.size());
             assertEquals(1, resultAfterDelete.intValue());

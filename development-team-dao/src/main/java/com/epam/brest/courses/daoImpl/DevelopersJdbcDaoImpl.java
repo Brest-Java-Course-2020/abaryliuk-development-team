@@ -129,10 +129,11 @@ public class DevelopersJdbcDaoImpl implements DevelopersJdbcDao {
     }
 
     @Override
-    public Integer deleteDeveloperFromProject_Developers(Integer developerId) {
+    public Integer deleteDeveloperFromProject_Developers(Integer progectId, Integer developerId) {
 
-        LOGGER.debug("DAO deleteDeveloperFromProject_Developers(). Developer id = {}", developerId);
+        LOGGER.debug("DAO deleteDeveloperFromProject_Developers(). Developer id = {}, Project id = {}", developerId, progectId);
         parameterSource.addValue("developerId", developerId);
+        parameterSource.addValue("projectId", progectId);
         Integer result = namedParameterJdbcTemplate.update(sqlDeleteFromProjectDevelopers,parameterSource);
         return result;
     }

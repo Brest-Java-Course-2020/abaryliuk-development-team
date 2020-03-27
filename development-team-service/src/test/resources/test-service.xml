@@ -6,11 +6,7 @@
 
     <bean id="developers" class="com.epam.brest.courses.model.Developers"/>
 
-
     <bean id="projects" class="com.epam.brest.courses.model.Projects" scope="prototype">
-        <constructor-arg>
-            <bean class="java.util.Date"/>
-        </constructor-arg>
     </bean>
 
     <bean id="developersService" class="com.epam.brest.courses.service.DevelopersServiceImpl">

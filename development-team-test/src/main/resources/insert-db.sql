@@ -11,28 +11,28 @@ INSERT INTO projects
 VALUES (3, 'Create a web application based on Hibernate', '2020-01-17');
 
 INSERT INTO developers
-VALUES (4, 'Ivan', 'Ivanov');
+VALUES (1, 'Ivan', 'Ivanov');
 
 INSERT INTO developers
-VALUES (5, 'Petr', 'Petrov');
+VALUES (2, 'Petr', 'Petrov');
 
 INSERT INTO developers
-VALUES (6, 'Sergey', 'Ivanov');
+VALUES (3, 'Sergey', 'Ivanov');
 
 INSERT INTO developers
-VALUES (7, 'Mike', 'Djonson');
+VALUES (4, 'Mike', 'Djonson');
 
 INSERT INTO developers
-VALUES (8, 'Artem', 'Lopata');
+VALUES (5, 'Artem', 'Lopata');
 
 INSERT INTO developers
-VALUES (9,'Astra', 'Mironova');
+VALUES (6,'Astra', 'Mironova');
 
 INSERT INTO developers
-VALUES (10, 'Zlata', 'Maximochkina');
+VALUES (7, 'Zlata', 'Maximochkina');
 
 INSERT INTO developers
-VALUES (11, 'Daria', 'Lihacheva');
+VALUES (8, 'Daria', 'Lihacheva');
 
 INSERT INTO projects_developers
 VALUES (1, 1);

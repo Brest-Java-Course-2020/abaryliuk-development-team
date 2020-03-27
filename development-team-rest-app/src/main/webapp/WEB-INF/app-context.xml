@@ -31,9 +31,6 @@
     </bean>
 
     <bean id="projects" class="com.epam.brest.courses.model.Projects" scope="prototype">
-        <constructor-arg>
-            <bean class="java.util.Date"/>
-        </constructor-arg>
     </bean>
 
     <bean id="developersDaoDto" class="com.epam.brest.courses.daoImpl.ProjectJdbcDaoDtoImpl">

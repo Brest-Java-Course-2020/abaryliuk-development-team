@@ -1,6 +1,9 @@
 package com.epam.brest.courses.web_app;
 
+import com.epam.brest.courses.model.Developers;
 import com.epam.brest.courses.model.Projects;
+import com.epam.brest.courses.model.dto.ProjectsDto;
+import com.epam.brest.courses.service.DevelopersService;
 import com.epam.brest.courses.service.ProjectsDtoService;
 import com.epam.brest.courses.service.ProjectsService;
 import com.epam.brest.courses.web_app.validators.ProjectsValidator;
@@ -18,7 +21,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -34,9 +38,12 @@ public class ProjectsController {
 
     private final ProjectsService projectsService;
 
-    public ProjectsController(ProjectsDtoService projectsDtoService, ProjectsService projectsService) {
+    private final DevelopersService developersService;
+
+    public ProjectsController(ProjectsDtoService projectsDtoService, ProjectsService projectsService, DevelopersService developersService) {
         this.projectsDtoService = projectsDtoService;
         this.projectsService = projectsService;
+        this.developersService = developersService;
     }
 
 
@@ -52,9 +59,9 @@ public class ProjectsController {
      * @return view name
      */
     @GetMapping
-    public final String projects(@DateTimeFormat(pattern = "yyyy-MM-dd")
-                                 @RequestParam (value = "dateStart", required = false) Date dateStart,
-                                 @RequestParam (value = "dateEnd", required = false) Date dateEnd,
+    public final String projects(
+                                 @RequestParam (value = "dateStart", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateStart,
+                                 @RequestParam (value = "dateEnd", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateEnd,
                                  Model model){
 
      if (dateStart!= null && dateEnd != null){
@@ -65,7 +72,10 @@ public class ProjectsController {
     else{
 
          LOGGER.debug("Find all projects");
-         model.addAttribute("projects", projectsDtoService.countOfDevelopers());
+         List<ProjectsDto> projectsDtoList =projectsDtoService.countOfDevelopers();
+         LOGGER.debug("Date = {}",projectsDtoList.get(0).getDateAdded() );
+
+         model.addAttribute("projects", projectsDtoList );
     }
 
   return "projects";
@@ -81,10 +91,14 @@ public class ProjectsController {
 
         LOGGER.debug("gotoEditProjectsPage({},{})", projectId, model);
         Optional<Projects> optionalProjects = projectsService.findById(projectId);
-
+        List<Developers> developersList = developersService.selectDevelopersFromProjects_Developers(projectId);
+        List<Developers> allDevelopers = developersService.findAll();
+        LOGGER.debug("Count of developers = {}", developersList.size());
         if (optionalProjects.isPresent()) {
             model.addAttribute("isNew", false);
             model.addAttribute("project", optionalProjects.get());
+            model.addAttribute("developers", developersList);
+            model.addAttribute("developersList", allDevelopers);
             return "project";
         } else {
             // TODO department not found - pass error message as parameter or handle not found error
@@ -119,7 +133,7 @@ public class ProjectsController {
      * @return view name
      */
     @GetMapping(value = "/add")
-    public final String gotoAddDepartmentPage(Model model) {
+    public final String gotoAddProjectPage(Model model) {
 
         LOGGER.debug("gotoAddProjectPage({})", model);
         model.addAttribute("isNew", true);
@@ -135,10 +149,10 @@ public class ProjectsController {
      * @return view name
      */
     @PostMapping(value = "/add")
-    public String addDepartment(@Valid Projects project,
+    public String addProject(@Valid Projects project,
                                 BindingResult result) {
 
-        LOGGER.debug("addDepartment({}, {})", project, result);
+        LOGGER.debug("addProject{}, {})", project, result);
         projectsValidator.validate(project, result);
         if (result.hasErrors()) {
             return "project";
@@ -162,11 +176,19 @@ public class ProjectsController {
         return "redirect:/projects";
     }
 
-    @InitBinder
-    public void initBinder(WebDataBinder webDataBinder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormat.setLenient(false);
-        webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+    /**
+     * Delete project.
+     *
+     * @return view name
+     */
+    @GetMapping(value = "/{projectId}/{developerId}/delete")
+    public final String deleteDeveloperFromProjects_developers( @PathVariable Integer projectId
+                                                               ,@PathVariable Integer developerId
+                                                               ,Model model) {
+
+        LOGGER.debug("delete({},{}{})", projectId, developerId, model);
+        developersService.deleteDeveloperFromProject_Developers(projectId,developerId);
+        return "redirect:/projects";
     }
 
 }

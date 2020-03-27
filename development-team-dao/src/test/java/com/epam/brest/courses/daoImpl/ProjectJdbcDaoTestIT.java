@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,7 +59,7 @@ class ProjectJdbcDaoTestIT {
 
         Projects projectTest = project;
         projectTest.setDescription(RandomStringUtils.randomAlphabetic(PROJECT_DESCRIPTION_SIZE));
-        Date checkDate = projectTest.getDateAdded();
+        LocalDate checkDate = projectTest.getDateAdded();
         Integer id =projectsDao.create(projectTest);
         System.out.println(projectsDao.findById(id).get().getDateAdded());
         Optional<Projects> optionalProjects = projectsDao.findById(id);
@@ -73,7 +73,7 @@ class ProjectJdbcDaoTestIT {
             assertTrue(optionalUpdateProjects.isPresent());
 
         assertEquals(1, result.intValue());
-        assertEquals( checkDate.getTime(), optionalUpdateProjects.get().getDateAdded().getTime());
+        assertEquals( checkDate, optionalUpdateProjects.get().getDateAdded());
         assertSame(optionalProjects.get().getDescription(), optionalUpdateProjects.get().getDescription());
     }
 
@@ -82,7 +82,7 @@ class ProjectJdbcDaoTestIT {
 
         Projects projectTest = project;
         projectTest.setDescription(RandomStringUtils.randomAlphabetic(PROJECT_DESCRIPTION_SIZE));
-        Date date = projectTest.getDateAdded();
+        LocalDate date = projectTest.getDateAdded();
         String description = projectTest.getDescription();
         Integer id = projectsDao.create(projectTest);
         assertEquals(description, projectsDao.findById(id).get().getDescription());

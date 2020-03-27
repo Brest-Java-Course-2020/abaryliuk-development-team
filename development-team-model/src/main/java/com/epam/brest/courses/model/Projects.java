@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * Projects.
@@ -17,13 +17,7 @@ public class Projects {
      * Constructor without arguments.
      */
     public Projects() {
-    }
-
-    /**
-     * Constructor with argument dateAdded.
-     */
-    public Projects(Date dateAdded) {
-        this.dateAdded=dateAdded;
+        this.dateAdded=LocalDate.now();
     }
 
     /**
@@ -39,8 +33,8 @@ public class Projects {
     /**
      * Date adding of project.
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dateAdded;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate dateAdded;
 
 
     /**
@@ -88,7 +82,7 @@ public class Projects {
      * @return dateAdded Project add date.
      */
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    public final Date getDateAdded() {
+    public final LocalDate getDateAdded() {
         return dateAdded;
     }
 
@@ -97,7 +91,7 @@ public class Projects {
      *
      * @param dateAdded eAdded Project dateAdded.
      */
-    public Projects setDateAdded(Date dateAdded) {
+    public Projects setDateAdded(LocalDate dateAdded) {
         this.dateAdded = dateAdded;
         return this;
     }

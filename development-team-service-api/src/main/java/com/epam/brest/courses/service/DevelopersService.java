@@ -68,6 +68,6 @@ public interface DevelopersService {
      * @param developerId
      * @return number of updated records in the database.
      */
-    Integer deleteDeveloperFromProject_Developers(Integer developerId);
+    Integer deleteDeveloperFromProject_Developers(Integer projectId, Integer developerId);
 }
 

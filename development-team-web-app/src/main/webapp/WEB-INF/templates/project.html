@@ -13,6 +13,7 @@
     <link rel="stylesheet"
           href="../../resources/static/css/style.css"
           th:href="@{/resources/static/css/style.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <title>Edit Project</title>
 </head>
 <body>
@@ -109,29 +110,59 @@
             </div>
         </div>
     </div>
-</section>
+
 <section id="developers">
     <div class="container-fluid">
         <div class="row">
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <table class="table table-striped">
+                        <label class="form-control-label"
+                               for="field_developerList">Add developer to project</label>
+
+                        <form>
+                            <div class="row">
+                                <div class="col-11">
+                                    <select class="form-control"
+                                            id="field_developerList">
+                                        <option th:each="developer : ${developersList}"
+                                                value="0" th:value="${developer.developerId}"
+                                                th:text="${developer.lastName}">Masyny</option>
+
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <a href="project.html"
+                                       th:href="@{/projects/add}"
+                                       class="btn btn-light"
+                                       title="Add project"
+                                       data-toggle="tooltip"
+                                       data-placement="bottom">
+                                        <i class="fa fa-plus"></i>
+                                        <span class="d-none d-sm-inline">Add</span></a>
+                                </div>
+                            </div>
+                        </form>
+
+                        <table class="table table-striped" >
                             <thead class="thead-dark">
                             <tr>
+                                <th>ID</th>
                                 <th>FirstName</th>
                                 <th>LastName</th>
+
                                 <th></th>
                             </tr>
                             </thead>
                             <tbody>
                                 <tr th:each="developer : ${developers}">
+                                    <td th:text="${developer.developerId}">5</td>
                                     <td th:text="${developer.firstName}">Vasy</td>
-                                    <td th:date="${developer.lastName}">Sidorov</td>
+                                    <td th:text="${developer.lastName}">Sidorov</td>
                                         <td class="text-right">
                                             <span data-toggle="modal"
                                                   data-target="#deleteDialog"
-                                                  th:attr="data-id=${developer.developerId}">
+                                                  th:attr="data-proid=${project.projectId},data-devid=${developer.developerId}">
                                                             <a href="#" class="btn-sm btn-outline-secondary"
                                                                title="delete project"
                                                                data-toggle="tooltip"
@@ -142,13 +173,13 @@
                                         </td>
                                 </tr>
                             </tbody>
-
                         </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</section>
 </section>
 <footer>
     <hr/>
@@ -182,20 +213,21 @@
         th:src="@{/resources/static/js/popper.min.js}"></script>
 <script src="../../resources/static/js/bootstrap.min.js"
         th:src="@{/resources/static/js/bootstrap.min.js}"></script>
-<script>
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
-</script>
+
 <script>
     $('#deleteDialog').on('show.bs.modal', function (event) {
         var target = $(event.relatedTarget)
-        $(this).find('.modal-body').text('Please confirm delete developer from project: "' + target.data('id') + '"')
-        document.getElementById('deleteUrl').href = '/projects/' + target.data('id') + '/delete' + '/from';
+        $(this).find('.modal-body').text('Please confirm delete developer from project: "' + target.data('devid') + '"')
+        document.getElementById('deleteUrl').href = '/projects/' + target.data('proid')+'/' + target.data('devid') + '/delete';
     })
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
 </script>
+<!--<script>-->
+<!--    $(function () {-->
+<!--        $('[data-toggle="tooltip"]').tooltip()-->
+<!--    })-->
+<!--</script>-->
 </body>
 </html>

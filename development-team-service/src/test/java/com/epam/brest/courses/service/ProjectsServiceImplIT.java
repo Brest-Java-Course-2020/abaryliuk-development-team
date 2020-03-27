@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -44,7 +45,7 @@ class ProjectsServiceImplIT {
 
         project.setDescription(RandomStringUtils.randomAlphabetic(PROJECT_DESCRIPTION_SIZE));
         String description = project.getDescription();
-        Date testDate = project.getDateAdded();
+        LocalDate testDate = project.getDateAdded();
         Integer projectId = projectsService.create(project);
 
         Optional<Projects> optionalProjects = projectsService.findById(projectId);
@@ -58,7 +59,7 @@ class ProjectsServiceImplIT {
 
         project.setDescription("TextBeforeUpdate");
         String description = project.getDescription();
-        Date testDate = project.getDateAdded();
+        LocalDate testDate = project.getDateAdded();
         Integer projectId = projectsService.create(project);
 
         Optional<Projects> projectBeforeUpdate = projectsService.findById(projectId);

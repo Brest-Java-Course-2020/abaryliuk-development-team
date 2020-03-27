@@ -97,8 +97,8 @@
                         <tbody>
                         <tr th:each="project : ${projects}">
                             <td th:text="${project.projectId}">1</td>
-                            <td th:date="${project.dateAdded}">2019-03-12</td>
-                            <td th:text="${project.countOfDevelopers}">2</td>
+                            <td th:text="${project.dateAdded}">2019-03-12</td>
+                            <td th:text="${project.countOfDevelopers}">0</td>
                             <td class="text-right">
                                 <a href="project.html"
                                    th:href="@{|/projects/${project.projectId}|}"
