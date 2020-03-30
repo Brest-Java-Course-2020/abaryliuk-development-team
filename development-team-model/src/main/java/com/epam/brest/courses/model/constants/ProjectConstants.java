@@ -29,6 +29,6 @@
         /**
          * Project's PROJECT_DESCRIPTION_SIZE.
          */
-        public static final int PROJECT_DESCRIPTION_SIZE = 250;
+        public static final int PROJECT_DESCRIPTION_SIZE = 100;
 
     }

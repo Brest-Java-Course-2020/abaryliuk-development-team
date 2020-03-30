@@ -12,6 +12,7 @@
     <link rel="stylesheet"
           href="../../resources/static/css/style.css"
           th:href="@{/resources/static/css/style.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <title>Employees</title>
 </head>
 <body>
@@ -27,23 +28,23 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <a class="nav-item nav-link"
-                   href="departments.html"
-                   th:href="@{/departments}">Departments</a>
+                   href="projects.html"
+                   th:href="@{/projects}">Projects</a>
                 <a class="nav-item nav-link active"
-                   href="employees.html"
-                   th:href="@{/employees}">Employees</a>
+                   href="developers.html"
+                   th:href="@{/developers}">Developers</a>
             </ul>
         </div>
     </nav>
     <nav id="main-header"
          class="py-1 mb-3 navbar navbar-expand-sm navbar-light bg-light text-dark">
-        <span class="navbar-brand text-uppercase mr-auto">Employees</span>
+        <span class="navbar-brand text-uppercase mr-auto">Developers</span>
         <ul class="navbar-nav float-right">
             <li class="nav-item">
-                <a href="employee.html"
-                   th:href="@{/employee}"
+                <a href="developer.html"
+                   th:href="@{/developers/developer}"
                    class="btn btn-light"
-                   title="Add employee"
+                   title="Add developer"
                    data-toggle="tooltip"
                    data-placement="bottom">
                     <i class="fa fa-plus"></i> <span
@@ -53,7 +54,7 @@
     </nav>
 </header>
 
-<section id="employees">
+<section id="developers">
     <div class="container-fluid">
         <div class="row">
             <div class="col">
@@ -61,53 +62,29 @@
                     <table class="table table-striped">
                         <thead class="thead-dark">
                         <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Salary</th>
+                            <th>FirstName</th>
+                            <th>LastName</th>
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="employee : ${employees}">
-                            <td th:text="${employee.firstname}">Ivan Ivanov</td>
-                            <td th:text="${employee.email}">ivan.ivanov@test.com</td>
-                            <td th:text="${employee.salary}">1000</td>
+                        <tr th:each="developer : ${developers}">
+                            <td th:text="${developer.firstName}">Ivan</td>
+                            <td th:text="${developer.lastName}">Ivanov</td>
                             <td class="text-right">
-                                <a href="employee.html"
-                                   th:href="@{|/employee/${employee.employeeId}|}"
+                                <a href="developer.html"
+                                   th:href="@{|/developers/${developer.developerId}|}"
                                    class="btn-sm btn-outline-secondary"
-                                   title="Edit employee"
+                                   title="Edit developer"
                                    data-toggle="tooltip"
                                    data-placement="top">
                                     <i class="fa fa-pencil"></i> <span
                                         class="d-none d-md-inline">Edit</span></a>
                                 <span data-toggle="modal"
                                       data-target="#deleteDialog"
-                                      th:attr="data-id=${employee.employeeId},data-name=${employee.firstname}">
+                                      th:attr="data-id=${developer.developerId},data-name=${developer.LastName}">
                                 <a href="#" class="btn-sm btn-outline-secondary"
-                                   title="Delete employee"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="fa fa-remove"></i> <span class="d-none d-md-inline">Delete</span></a>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr th:remove="all">
-                            <td>Alexander Petrov</td>
-                            <td>alex.petrov@test.com</td>
-                            <td>1100</td>
-                            <td class="text-right">
-                                <a href="employee.html"
-                                   th:href="@{/employee}"
-                                   class="btn-sm btn-outline-secondary"
-                                   title="Edit employee"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="fa fa-pencil"></i> <span
-                                        class="d-none d-md-inline">Edit</span></a>
-                                <span data-toggle="modal" data-target="#deleteDialog">
-                                <a href="#" class="btn-sm btn-outline-secondary"
-                                   title="Delete employee"
+                                   title="Delete developer"
                                    data-toggle="tooltip"
                                    data-placement="top">
                                     <i class="fa fa-remove"></i> <span class="d-none d-md-inline">Delete</span></a>
@@ -133,7 +110,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header alert-danger">
-                <h5 class="modal-title" id="exampleModalLabel">Delete employee</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Delete developer</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -158,8 +135,8 @@
 <script>
     $('#deleteDialog').on('show.bs.modal', function (event) {
         var target = $(event.relatedTarget)
-        $(this).find('.modal-body').text('Please confirm delete employee: "' + target.data('name') + '"')
-        document.getElementById('deleteUrl').href = '/employee/' + target.data('id') + '/delete';
+        $(this).find('.modal-body').text('Please confirm delete developer: "' + target.data('name') + '"')
+        document.getElementById('deleteUrl').href = '/developers/' + target.data('id') + '/delete';
     })
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()

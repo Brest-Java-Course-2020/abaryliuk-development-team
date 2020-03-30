@@ -47,9 +47,9 @@ public class Projects {
     }
 
     /**
-     * Sets the department's identifier.
+     * Sets the project's identifier.
      *
-     * @param projectId Department Id.
+     * @param projectId Project's Id.
      */
     public final Projects setProjectId(Integer projectId) {
         this.projectId = projectId;

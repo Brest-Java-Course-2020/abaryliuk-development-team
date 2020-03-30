@@ -99,60 +99,6 @@ class DevelopersJdbcDaoTestIT {
 
     }
 
-    @Test
-    void shouldSelectDevelopersFromProjects_Developers() {
-
-        Developers developer = newDeveloper();
-        Integer firstDeveloperId = developersJdbcDao.create(developer);
-        Integer secondDeveloperId = developersJdbcDao.create(developer);
-        Projects newProject = project;
-        newProject.setDescription(RandomStringUtils.randomAlphabetic(PROJECT_DESCRIPTION_SIZE));
-        Integer projectId = projectJdbcDao.create(newProject);
-        Integer resultFirst = developersJdbcDao.addDeveloperToProjects_Developers(projectId, firstDeveloperId);
-        Integer resultSecond = developersJdbcDao.addDeveloperToProjects_Developers(projectId, secondDeveloperId);
-
-        List<Developers> developersList = developersJdbcDao.selectDevelopersFromProjects_Developers(projectId);
-        assertEquals(2, developersList.size());
-        assertEquals(0, resultFirst.intValue());
-        assertEquals(0, resultSecond.intValue());
-
-    }
-
-    @Test
-    void shoulAddDeveloperToProjects_Developers() {
-
-        Developers developer = newDeveloper();
-        Integer developerId = developersJdbcDao.create(developer);
-            Projects newProject = project;
-            newProject.setDescription(RandomStringUtils.randomAlphabetic(PROJECT_DESCRIPTION_SIZE));
-            Integer projectId = projectJdbcDao.create(newProject);
-        Integer result = developersJdbcDao.addDeveloperToProjects_Developers(projectId, developerId);
-
-        List<Developers> developersList = developersJdbcDao.selectDevelopersFromProjects_Developers(projectId);
-        assertEquals(1, developersList.size());
-        assertEquals(0, result.intValue());
-    }
-
-    @Test
-    void shoulDeleteDeveloperFromProject_Developers() {
-
-        Developers developer = newDeveloper();
-        Integer developerId = developersJdbcDao.create(developer);
-        Projects newProject = project;
-        newProject.setDescription(RandomStringUtils.randomAlphabetic(PROJECT_DESCRIPTION_SIZE));
-        Integer projectId = projectJdbcDao.create(newProject);
-        Integer resultFirst = developersJdbcDao.addDeveloperToProjects_Developers(projectId, developerId);
-
-        List<Developers> developersList = developersJdbcDao.selectDevelopersFromProjects_Developers(projectId);
-        assertEquals(1, developersList.size());
-        assertEquals(0, resultFirst.intValue());
-
-        Integer resultAfterDelete = developersJdbcDao.deleteDeveloperFromProject_Developers(projectId, developerId);
-        List<Developers> developersListAfterDelete = developersJdbcDao.selectDevelopersFromProjects_Developers(projectId);
-        assertEquals(0, developersListAfterDelete.size());
-        assertEquals(1, resultAfterDelete.intValue());
-    }
-
     private static Developers newDeveloper(){
         Developers developer = new Developers();
         String firstName = RandomStringUtils.randomAlphabetic(LASTNAME_SIZE);

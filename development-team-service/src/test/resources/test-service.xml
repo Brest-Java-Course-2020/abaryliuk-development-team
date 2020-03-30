@@ -21,6 +21,14 @@
         <constructor-arg ref="projectsDao"/>
     </bean>
 
+    <bean id="projects_developersService" class="com.epam.brest.courses.service.Projects_DevelopersServiceImpl">
+        <constructor-arg ref="projects_developersDao"/>
+    </bean>
+
+    <bean id="projects_developersDao" class="com.epam.brest.courses.daoImpl.Projects_DevelopersJdbcDaoImpl">
+        <constructor-arg ref="jdbcTemplate"/>
+    </bean>
+
     <bean id="developersDao" class="com.epam.brest.courses.daoImpl.DevelopersJdbcDaoImpl">
         <constructor-arg ref="jdbcTemplate"/>
     </bean>

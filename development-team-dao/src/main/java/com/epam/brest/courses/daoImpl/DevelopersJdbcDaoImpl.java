@@ -44,15 +44,6 @@ public class DevelopersJdbcDaoImpl implements DevelopersJdbcDao {
     @Value("${DEV.sqlDeleteById}")
     private String sqlDeleteById;
 
-    @Value("${DEV.sqlSelectDeveloperFromProjectsDevelopers}")
-    private String sqlSelectDeveloperFromProjectsDevelopers;
-
-    @Value("${DEV.sqlAddDeveloperToProjectsDevelopers}")
-    private String sqlAddDeveloperToProjectsDevelopers;
-
-    @Value("${DEV.sqlDeleteFromProjectDevelopers}")
-    private String sqlDeleteFromProjectDevelopers;
-
     @Override
     public List<Developers> findAll() {
 
@@ -105,36 +96,6 @@ public class DevelopersJdbcDaoImpl implements DevelopersJdbcDao {
         parameterSource.addValue(DEVELOPER_ID, developerId);
        Integer result =  namedParameterJdbcTemplate.update(sqlDeleteById,parameterSource);
 
-        return result;
-    }
-
-    @Override
-    public List<Developers> selectDevelopersFromProjects_Developers(Integer projectId) {
-
-        LOGGER.debug("DAO SelectDeveloperFromProjects_Developers(). Project id = {}", projectId);
-        parameterSource.addValue("projectId", projectId);
-        List<Developers> developersList = namedParameterJdbcTemplate.query(sqlSelectDeveloperFromProjectsDevelopers
-                ,parameterSource, new BeanPropertyRowMapper<>(Developers.class));
-        return developersList;
-    }
-
-    @Override
-    public Integer addDeveloperToProjects_Developers(Integer projectId, Integer developerId) {
-
-        LOGGER.debug("DAO addDeveloperToProjects_Developers() Project id = {}. Developer id = {}",projectId,  developerId);
-        parameterSource.addValue("projectId", projectId);
-        parameterSource.addValue("developerId", developerId);
-        Integer result = namedParameterJdbcTemplate.update(sqlAddDeveloperToProjectsDevelopers,parameterSource);
-        return result;
-    }
-
-    @Override
-    public Integer deleteDeveloperFromProject_Developers(Integer progectId, Integer developerId) {
-
-        LOGGER.debug("DAO deleteDeveloperFromProject_Developers(). Developer id = {}, Project id = {}", developerId, progectId);
-        parameterSource.addValue("developerId", developerId);
-        parameterSource.addValue("projectId", progectId);
-        Integer result = namedParameterJdbcTemplate.update(sqlDeleteFromProjectDevelopers,parameterSource);
         return result;
     }
 }

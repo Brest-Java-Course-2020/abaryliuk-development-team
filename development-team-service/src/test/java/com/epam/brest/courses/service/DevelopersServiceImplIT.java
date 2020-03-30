@@ -14,7 +14,6 @@ import java.util.Optional;
 
 import static com.epam.brest.courses.model.constants.DeveloperConstants.FIRSTNAME_SIZE;
 import static com.epam.brest.courses.model.constants.DeveloperConstants.LASTNAME_SIZE;
-import static com.epam.brest.courses.model.constants.ProjectConstants.PROJECT_DESCRIPTION_SIZE;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
@@ -116,59 +115,5 @@ class DevelopersServiceImplIT {
         assertFalse(optionalDevelopers.isPresent());
     }
 
-    @Test
-    void shouldSelectDevelopersFromProjects_Developers() {
 
-        developers.setLastName(RandomStringUtils.randomAlphabetic(LASTNAME_SIZE));
-        developers.setFirstName(RandomStringUtils.randomAlphabetic(FIRSTNAME_SIZE));
-        Integer firstDeveloperId = developersService.create(developers);
-        Integer secondDeveloperId = developersService.create(developers);
-
-        Projects newProject = project;
-        newProject.setDescription(RandomStringUtils.randomAlphabetic(PROJECT_DESCRIPTION_SIZE));
-        Integer projectId = projectsService.create(newProject);
-        Integer firstResult = developersService.addDeveloperToProjects_Developers(projectId, firstDeveloperId);
-        Integer secondResult = developersService.addDeveloperToProjects_Developers(projectId, secondDeveloperId);
-        List<Developers> developersList = developersService.selectDevelopersFromProjects_Developers(projectId);
-        assertEquals(2, developersList.size());
-        assertEquals(0, firstResult.intValue());
-        assertEquals(0, secondResult.intValue());
-    }
-
-    @Test
-    void shouldAddDeveloperToProjects_Developers() {
-
-        developers.setLastName(RandomStringUtils.randomAlphabetic(LASTNAME_SIZE));
-        developers.setFirstName(RandomStringUtils.randomAlphabetic(FIRSTNAME_SIZE));
-        Integer developerId = developersService.create(developers);
-            Projects newProject = project;
-            newProject.setDescription(RandomStringUtils.randomAlphabetic(PROJECT_DESCRIPTION_SIZE));
-            Integer projectId = projectsService.create(newProject);
-        Integer result = developersService.addDeveloperToProjects_Developers(projectId, developerId);
-
-        List<Developers> developersList = developersService.selectDevelopersFromProjects_Developers(projectId);
-        assertEquals(1, developersList.size());
-        assertEquals(0, result.intValue());
-    }
-
-    @Test
-    void shouldDeleteDeveloperFromProject_Developers() {
-
-        developers.setLastName(RandomStringUtils.randomAlphabetic(LASTNAME_SIZE));
-        developers.setFirstName(RandomStringUtils.randomAlphabetic(FIRSTNAME_SIZE));
-        Integer developerId = developersService.create(developers);
-            Projects newProject = project;
-            newProject.setDescription(RandomStringUtils.randomAlphabetic(PROJECT_DESCRIPTION_SIZE));
-            Integer projectId = projectsService.create(newProject);
-
-        Integer result = developersService.addDeveloperToProjects_Developers(projectId, developerId);
-        List<Developers> developersList = developersService.selectDevelopersFromProjects_Developers(projectId);
-            assertEquals(1, developersList.size());
-            assertEquals(0, result.intValue());
-
-        Integer resultAfterDelete = developersService.deleteDeveloperFromProject_Developers(projectId, developerId);
-        List<Developers> developersListAfterDelete = developersService.selectDevelopersFromProjects_Developers(projectId);
-            assertEquals(0, developersListAfterDelete.size());
-            assertEquals(1, resultAfterDelete.intValue());
-    }
 }

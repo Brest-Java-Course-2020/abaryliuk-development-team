@@ -32,7 +32,14 @@
         </property>
     </bean>
 
-    <bean id="projects" class="com.epam.brest.courses.model.Projects" scope="prototype">
+    <bean id="projects" class="com.epam.brest.courses.model.Projects" scope="prototype"/>
+
+    <bean id="developers" class="com.epam.brest.courses.model.Developers"/>
+
+    <bean id="projects_developers" class="com.epam.brest.courses.model.Projects_Developers"/>
+
+    <bean id="projects_developerDao" class="com.epam.brest.courses.daoImpl.Projects_DevelopersJdbcDaoImpl">
+        <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>
 
     <bean id="developerDao" class="com.epam.brest.courses.daoImpl.DevelopersJdbcDaoImpl">

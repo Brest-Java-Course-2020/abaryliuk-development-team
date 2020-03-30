@@ -2,25 +2,24 @@ package com.epam.brest.courses.web_app;
 
 import com.epam.brest.courses.model.Developers;
 import com.epam.brest.courses.model.Projects;
+import com.epam.brest.courses.model.Projects_Developers;
 import com.epam.brest.courses.model.dto.ProjectsDto;
 import com.epam.brest.courses.service.DevelopersService;
 import com.epam.brest.courses.service.ProjectsDtoService;
 import com.epam.brest.courses.service.ProjectsService;
+import com.epam.brest.courses.service.Projects_DevelopersService;
 import com.epam.brest.courses.web_app.validators.ProjectsValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -40,10 +39,13 @@ public class ProjectsController {
 
     private final DevelopersService developersService;
 
-    public ProjectsController(ProjectsDtoService projectsDtoService, ProjectsService projectsService, DevelopersService developersService) {
+    private final Projects_DevelopersService projects_developersService;
+
+    public ProjectsController(ProjectsDtoService projectsDtoService, ProjectsService projectsService, DevelopersService developersService, Projects_DevelopersService projects_developersService) {
         this.projectsDtoService = projectsDtoService;
         this.projectsService = projectsService;
         this.developersService = developersService;
+        this.projects_developersService = projects_developersService;
     }
 
 
@@ -52,6 +54,12 @@ public class ProjectsController {
 
         @Autowired
         Projects newProject;
+
+        @Autowired
+        Developers developer;
+
+        @Autowired
+        Projects_Developers projects_developers;
 
     /**
      * Goto projects list page.
@@ -87,22 +95,26 @@ public class ProjectsController {
      * @return view name
      */
     @GetMapping(value = "/{projectId}")
-    public final String gotoEditProjectsPage(@PathVariable Integer projectId, Model model) {
+    public final String gotoEditProjectsPage(@PathVariable Integer projectId
+                                            ,@RequestParam(required = false) Integer developerId
+                                            , Model model) {
 
-        LOGGER.debug("gotoEditProjectsPage({},{})", projectId, model);
+        if (developerId != null && !projects_developersService.findByIdFromProjects_Develoers(projectId,developerId).isPresent()){
+            LOGGER.debug("CONTROLLER - addDeveloperToProjects_Developers()");
+            projects_developersService.addDeveloperToProjects_Developers(projectId,developerId);
+        }
+
+        LOGGER.debug("CONTROLLER - gotoEditProjectsPage({},{})", projectId, model);
         Optional<Projects> optionalProjects = projectsService.findById(projectId);
-        List<Developers> developersList = developersService.selectDevelopersFromProjects_Developers(projectId);
-        List<Developers> allDevelopers = developersService.findAll();
-        LOGGER.debug("Count of developers = {}", developersList.size());
         if (optionalProjects.isPresent()) {
-            model.addAttribute("isNew", false);
             model.addAttribute("project", optionalProjects.get());
-            model.addAttribute("developers", developersList);
-            model.addAttribute("developersList", allDevelopers);
+            model.addAttribute("developers", projects_developersService.selectDevelopersFromProjects_Developers(projectId));
+            model.addAttribute("developersList", developersService.findAll());
+            model.addAttribute("developerEntity", developer);
             return "project";
         } else {
             // TODO department not found - pass error message as parameter or handle not found error
-            return "redirect:projects";
+            return "redirect:/projects";
         }
     }
 
@@ -114,12 +126,14 @@ public class ProjectsController {
      * @return view name
      */
     @PostMapping(value = "/{id}")
-    public String updateProject(@Valid Projects project,
-                                BindingResult result){
+    public String updateProject(@ModelAttribute("project") @Valid Projects project,
+                                BindingResult result, Model model){
 
+        model.addAttribute("developerEntity", developer);
         LOGGER.debug("updateProject({}, {})", project, result);
         projectsValidator.validate(project, result);
         if (result.hasErrors()) {
+            LOGGER.debug("ERROR______________________________________P");
             return "project";
         } else {
             this.projectsService.update(project);
@@ -136,9 +150,9 @@ public class ProjectsController {
     public final String gotoAddProjectPage(Model model) {
 
         LOGGER.debug("gotoAddProjectPage({})", model);
-        model.addAttribute("isNew", true);
         model.addAttribute("project", newProject);
-        return "project";
+        model.addAttribute("developerEntity", developer);
+        return "projectAdd";
     }
 
     /**
@@ -187,8 +201,8 @@ public class ProjectsController {
                                                                ,Model model) {
 
         LOGGER.debug("delete({},{}{})", projectId, developerId, model);
-        developersService.deleteDeveloperFromProject_Developers(projectId,developerId);
-        return "redirect:/projects";
+        projects_developersService.deleteDeveloperFromProject_Developers(projectId,developerId);
+        return "redirect:/projects/"+projectId;
     }
 
 }
