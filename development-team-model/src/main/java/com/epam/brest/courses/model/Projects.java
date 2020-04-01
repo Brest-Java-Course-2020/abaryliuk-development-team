@@ -1,5 +1,6 @@
 package com.epam.brest.courses.model;
 
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -81,7 +82,7 @@ public class Projects {
      *
      * @return dateAdded Project add date.
      */
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     public final LocalDate getDateAdded() {
         return dateAdded;
     }

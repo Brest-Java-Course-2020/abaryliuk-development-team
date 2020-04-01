@@ -2,7 +2,6 @@ package com.epam.brest.courses.web_app;
 
 import com.epam.brest.courses.model.Developers;
 import com.epam.brest.courses.model.Projects;
-import com.epam.brest.courses.model.Projects_Developers;
 import com.epam.brest.courses.model.dto.ProjectsDto;
 import com.epam.brest.courses.service.DevelopersService;
 import com.epam.brest.courses.service.ProjectsDtoService;
@@ -52,14 +51,7 @@ public class ProjectsController {
         @Autowired
         ProjectsValidator projectsValidator;
 
-        @Autowired
-        Projects newProject;
-
-        @Autowired
-        Developers developer;
-
-        @Autowired
-        Projects_Developers projects_developers;
+        Developers developer = new Developers();
 
     /**
      * Goto projects list page.
@@ -133,7 +125,6 @@ public class ProjectsController {
         LOGGER.debug("updateProject({}, {})", project, result);
         projectsValidator.validate(project, result);
         if (result.hasErrors()) {
-            LOGGER.debug("ERROR______________________________________P");
             return "project";
         } else {
             this.projectsService.update(project);
@@ -150,7 +141,7 @@ public class ProjectsController {
     public final String gotoAddProjectPage(Model model) {
 
         LOGGER.debug("gotoAddProjectPage({})", model);
-        model.addAttribute("project", newProject);
+        model.addAttribute("project", new Projects());
         model.addAttribute("developerEntity", developer);
         return "projectAdd";
     }

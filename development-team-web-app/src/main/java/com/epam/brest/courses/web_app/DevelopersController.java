@@ -24,8 +24,8 @@ public class DevelopersController {
     @Autowired
     private DevelopersValidator developersValidator;
 
-    @Autowired
-    Developers developer;
+
+    Developers developer = new Developers();
 
     private final DevelopersService developersService;
 
@@ -73,7 +73,6 @@ public class DevelopersController {
         LOGGER.debug("updateDeveloper({}, {})", developer, result);
         developersValidator.validate(developer, result);
         if (result.hasErrors()) {
-            LOGGER.debug("ERROR_______________________________");
             return "developer";
         } else {
             this.developersService.update(developer);

@@ -1,14 +1,10 @@
 package com.epam.brest.courses.rest_app;
 
 import com.epam.brest.courses.model.Projects;
-import com.epam.brest.courses.model.dto.ProjectsDto;
 import com.epam.brest.courses.rest_app.exception.projectsException.ProjectsNotFoundException;
-import com.epam.brest.courses.service.ProjectsDtoService;
-
 import com.epam.brest.courses.service.ProjectsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -26,28 +22,23 @@ public class ProjectsController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProjectsController.class);
 
-    @Autowired
-    Projects projectNew;
-
     private final ProjectsService projectsService;
 
-    private final ProjectsDtoService projectsDtoService;
-
-    public ProjectsController(ProjectsService projectsService, ProjectsDtoService projectsDtoService) {
+    public ProjectsController(ProjectsService projectsService) {
         this.projectsService = projectsService;
-        this.projectsDtoService = projectsDtoService;
+
     }
 
     /**
      * Goto projects list page.
      *
-     * @return view name.
+     * @return view name
      */
-    @GetMapping(value = "/")
-    public final Collection<ProjectsDto> projects(){
+    @GetMapping
+    public final Collection<Projects> projects() {
 
-        LOGGER.debug("projects");
-        return projectsDtoService.countOfDevelopers();
+        LOGGER.debug("projects()");
+        return projectsService.findAll();
     }
 
     /**
@@ -70,10 +61,10 @@ public class ProjectsController {
      */
     @PostMapping(value = "/addByDescription", consumes = "application/json", produces = "application/json" )
     public Integer add(@RequestBody String description){
-
+        Projects project = new Projects();
         LOGGER.debug("Add project {}", description);
-        projectNew.setDescription(description);
-        return projectsService.create(projectNew);
+//        project.setDescription(description);
+        return projectsService.create(project);
     }
 
     /**

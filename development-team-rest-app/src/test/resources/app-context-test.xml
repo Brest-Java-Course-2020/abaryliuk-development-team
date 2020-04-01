@@ -30,15 +30,31 @@
         </property>
     </bean>
 
+    <bean id="projects_developersService" class="com.epam.brest.courses.service.Projects_DevelopersServiceImpl">
+        <constructor-arg ref="projects_developersDao"/>
+    </bean>
+
     <bean id="projects_developersDao" class="com.epam.brest.courses.daoImpl.Projects_DevelopersJdbcDaoImpl">
         <constructor-arg ref="namedParameterJdbcTemplate"/>
+    </bean>
+
+    <bean id="projectsServiceDto" class="com.epam.brest.courses.service.ProjectsDtoServiceImpl">
+        <constructor-arg ref="projectsDaoDto"/>
     </bean>
 
     <bean id="projectsDaoDto" class="com.epam.brest.courses.daoImpl.ProjectJdbcDaoDtoImpl">
         <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>
 
+    <bean id="developersService" class="com.epam.brest.courses.service.DevelopersServiceImpl">
+        <constructor-arg ref="developersDao"/>
+    </bean>
+
     <bean id="developersDao" class="com.epam.brest.courses.daoImpl.DevelopersJdbcDaoImpl">
+        <constructor-arg ref="namedParameterJdbcTemplate"/>
+    </bean>
+
+    <bean id="projectsService" class="com.epam.brest.courses.service.ProjectsServiceImpl">
         <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>
 
