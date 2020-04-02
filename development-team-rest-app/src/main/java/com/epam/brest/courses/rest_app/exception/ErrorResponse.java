@@ -1,5 +1,6 @@
 package com.epam.brest.courses.rest_app.exception;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -27,7 +28,16 @@ public class ErrorResponse {
      */
     private List<String> details;
 
-
+    /**
+     * Constructor with arguments: String message, Exception ex.
+     */
+    public ErrorResponse(String message, Exception ex) {
+        super();
+        this.message = message;
+        if (ex != null) {
+            this.details = Arrays.asList(ex.getMessage());
+        }
+    }
     /**
      * Returns <code>String</code> representation of this message.
      *

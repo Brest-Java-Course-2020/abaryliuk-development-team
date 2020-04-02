@@ -5,8 +5,10 @@ import com.epam.brest.courses.rest_app.exception.projectsException.ProjectsNotFo
 import com.epam.brest.courses.service.ProjectsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 
 import java.util.Collection;
 import java.util.Optional;
@@ -16,8 +18,7 @@ import java.util.Optional;
  * ProjectsController
  */
 @RestController
-@EnableSwagger2
-@RequestMapping("projects")
+@RequestMapping("/projects")
 public class ProjectsController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProjectsController.class);
@@ -72,7 +73,7 @@ public class ProjectsController {
      * @param project
      * @returnnew Project().
      */
-    @PostMapping(value = "/add", consumes = "application/json", produces = "application/json" )
+    @PostMapping(consumes = "application/json", produces = "application/json" )
     public Integer add(@RequestBody Projects project){
 
         LOGGER.debug("Add project {}", project);
@@ -83,16 +84,14 @@ public class ProjectsController {
     /**
      * Update project with request body = Projects project.
      *
-     * @param description
-     * @return Project after update.
+     * @return new ResponseEntity.
      */
-    @PutMapping(value = "/update/{projectId}", consumes = "application/json", produces = "application/json")
-    public Integer update(@PathVariable Integer projectId, @RequestBody String description){
+    @PutMapping( consumes = {"application/json"}, produces = {"application/json"})
+    public ResponseEntity<Integer> updateProject(@RequestBody Projects project) {
 
-        LOGGER.debug("Update project's description {} with projectId = {}", description, projectId);
-        Optional<Projects> projectsOptional = projectsService.findById(projectId);
-        Projects project = projectsOptional.get().setDescription(description);
-        return projectsService.update(project);
+        LOGGER.debug("updateProjectt({})", project);
+        int result = projectsService.update(project);
+        return new ResponseEntity(result, HttpStatus.OK);
     }
 
     /**

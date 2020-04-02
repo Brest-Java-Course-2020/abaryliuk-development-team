@@ -31,3 +31,16 @@ mvn jetty:run
 curl --location --request GET 'http://localhost:8080/testController'
 ```
 
+##Projects
+
+###findAll
+
+```
+curl --location --request GET 'http://localhost:8080/projects'
+```
+
+#### findById
+
+```
+curl --request GET 'http://localhost:8080/projects/1' | json_pp
+```

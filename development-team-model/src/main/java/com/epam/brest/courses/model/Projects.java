@@ -2,6 +2,10 @@ package com.epam.brest.courses.model;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -13,10 +17,16 @@ import java.time.LocalDate;
 @SuppressFBWarnings(value = { "EI_EXPOSE_REP", "EI_EXPOSE_REP2" }
                     , justification = "I prefer to suppress these FindBugs warnings")
 public class Projects {
+    public Projects(Integer projectId, String description, LocalDate dateAdded) {
+        this.projectId = projectId;
+        this.description = description;
+        this.dateAdded = dateAdded;
+    }
 
     /**
      * Constructor without arguments.
      */
+
     public Projects() {
         this.dateAdded=LocalDate.now();
     }
@@ -35,6 +45,8 @@ public class Projects {
      * Date adding of project.
      */
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate dateAdded;
 
 
