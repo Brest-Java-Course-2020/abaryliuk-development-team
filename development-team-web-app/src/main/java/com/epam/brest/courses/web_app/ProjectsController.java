@@ -15,6 +15,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -154,15 +155,24 @@ public class ProjectsController {
      * @return view name
      */
     @PostMapping(value = "/add")
-    public String addProject(@Valid Projects project,
-                                BindingResult result) {
+    public String addProject(@ModelAttribute("project")
+                             @Valid Projects project,
+                             BindingResult result,Model model) {
 
         LOGGER.debug("addProject{}, {})", project, result);
         projectsValidator.validate(project, result);
         if (result.hasErrors()) {
-            return "project";
+
+            return "projectAdd";
         } else {
-            this.projectsService.create(project);
+            try {
+                this.projectsService.create(project);
+            }
+                catch (IllegalArgumentException ie){
+                    result.rejectValue("description", "projectDescription.exist");;
+                    return "projectAdd";
+                }
+
             return "redirect:/projects";
         }
     }

@@ -1,6 +1,8 @@
 package com.epam.brest.courses.web_app.validators;
 
 import com.epam.brest.courses.model.Projects;
+import com.epam.brest.courses.service.ProjectsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
@@ -11,6 +13,9 @@ import static com.epam.brest.courses.model.constants.ProjectConstants.PROJECT_DE
 
 @Component
 public class ProjectsValidator implements Validator {
+
+    @Autowired
+    ProjectsService projectsService;
 
     @Override
     public boolean supports(Class<?> clazz) {

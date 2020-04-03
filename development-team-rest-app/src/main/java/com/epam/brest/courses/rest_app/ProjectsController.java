@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.Collection;
-import java.util.Optional;
-
 
 /**
  * ProjectsController
@@ -64,7 +62,7 @@ public class ProjectsController {
     public Integer add(@RequestBody String description){
         Projects project = new Projects();
         LOGGER.debug("Add project {}", description);
-//        project.setDescription(description);
+        project.setDescription(description);
         return projectsService.create(project);
     }
 

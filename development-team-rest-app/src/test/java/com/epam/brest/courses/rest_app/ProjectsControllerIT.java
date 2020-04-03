@@ -1,6 +1,7 @@
 package com.epam.brest.courses.rest_app;
 
 import com.epam.brest.courses.model.Projects;
+import com.epam.brest.courses.rest_app.exception.ErrorResponse;
 import com.epam.brest.courses.rest_app.exception.projectsException.CustomExceptionHandler;
 import com.epam.brest.courses.service.ProjectsServiceImpl;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -18,6 +19,7 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -25,6 +27,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.epam.brest.courses.model.constants.ProjectConstants.PROJECT_DESCRIPTION_SIZE;
+import static com.epam.brest.courses.rest_app.exception.projectsException.CustomExceptionHandler.PROJECT_NOT_FOUND;
+import static com.epam.brest.courses.rest_app.exception.projectsException.CustomExceptionHandler.VALIDATION_ERROR;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -85,7 +89,7 @@ class ProjectsControllerIT {
         // when
         int result = projectsService.update(projectOptional.get());
 
-//        // then
+        // then
         assertTrue(1 == result);
 
         Optional<Projects> updatedProjectOptional = projectsService.findById(id);
@@ -96,19 +100,108 @@ class ProjectsControllerIT {
     }
 
     @Test
-    void add() {
+    void shouldCreateProject() throws Exception {
+
+        Projects project = new Projects()
+                .setDescription(RandomStringUtils.randomAlphabetic(PROJECT_DESCRIPTION_SIZE));
+        Integer id = projectsService.create(project);
+        assertNotNull(id);
+
     }
 
     @Test
-    void testAdd() {
+    void shouldCreatByDescription() throws Exception {
+
+        // given
+        String description = RandomStringUtils.randomAlphabetic(PROJECT_DESCRIPTION_SIZE);
+
+        // when
+        Integer id = projectsService.createByDescription(description);
+
+        // then
+        Optional<Projects> projectsOptionalAfterAdded = projectsService.findById(id);
+
+        assertTrue(projectsOptionalAfterAdded.isPresent());
+        assertEquals(id,projectsOptionalAfterAdded.get().getProjectId());
+        assertEquals(description,projectsOptionalAfterAdded.get().getDescription());
     }
 
     @Test
-    void update() {
+    void shouldUpdateProject() throws Exception {
+
+        // given
+        Projects project = new Projects()
+                .setDescription(RandomStringUtils.randomAlphabetic(PROJECT_DESCRIPTION_SIZE));
+        Integer id = projectsService.create(project);
+        assertNotNull(id);
+
+        Optional<Projects> projectsOptional = projectsService.findById(id);
+        assertTrue(projectsOptional.isPresent());
+        projectsOptional.get().setDescription(RandomStringUtils.randomAlphabetic(PROJECT_DESCRIPTION_SIZE));
+
+        // when
+        Integer result = projectsService.update(projectsOptional.get());
+        Optional<Projects> projectsOptionalAfterUpdate = projectsService.findById(id);
+        assertTrue(projectsOptionalAfterUpdate.isPresent());
+
+        // then
+        assertTrue(1 ==result);
+        assertFalse(projectsOptionalAfterUpdate.get().getDescription() ==project.getDescription());
     }
 
     @Test
-    void delete() {
+    void shouldDeleteProject() throws Exception {
+
+        // given
+        Projects project = new Projects()
+                .setDescription(RandomStringUtils.randomAlphabetic(PROJECT_DESCRIPTION_SIZE));
+        Integer id = projectsService.create(project);
+        assertNotNull(id);
+
+        //when
+        Integer result = projectsService.delete(id);
+        assertTrue(1 == result);
+
+    }
+    @Test
+    public void shouldReturnProjectNotFoundError() throws Exception {
+
+        LOGGER.debug("shouldReturnProjectNotFoundError()");
+        MockHttpServletResponse response =
+                mockMvc.perform(MockMvcRequestBuilders.get(PROJECTS_ENDPOINT + "/999999")
+                        .accept(MediaType.APPLICATION_JSON)
+                ).andExpect(status().isNotFound())
+                        .andReturn().getResponse();
+        assertNotNull(response);
+        ErrorResponse errorResponse = objectMapper.readValue(response.getContentAsString(), ErrorResponse.class);
+        assertNotNull(errorResponse);
+        assertEquals(errorResponse.getMessage(), PROJECT_NOT_FOUND);
+    }
+
+    @Test
+    public void shouldFailOnCreateProjectWithDuplicateDescription() throws Exception {
+
+        LOGGER.debug("MOCK_MVC shouldFailOnCreateProjectWithDuplicateDescription()");
+        Projects project = new Projects()
+                .setDescription(RandomStringUtils.randomAlphabetic(PROJECT_DESCRIPTION_SIZE));
+        Integer id = projectsService.create(project);
+        assertNotNull(id);
+
+        Projects projectNew = new Projects()
+                .setDescription(project.getDescription());
+
+        MockHttpServletResponse response =
+                mockMvc.perform(post(PROJECTS_ENDPOINT)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(projectNew))
+                        .accept(MediaType.APPLICATION_JSON)
+                ).andExpect(status().isUnprocessableEntity())
+                        .andReturn().getResponse();
+
+        assertNotNull(response);
+        ErrorResponse errorResponse = objectMapper.readValue(response.getContentAsString(), ErrorResponse.class);
+        assertNotNull(errorResponse);
+        assertEquals(errorResponse.getMessage(), VALIDATION_ERROR );
     }
 
     class MockMvcProjectsService {
@@ -141,6 +234,20 @@ class ProjectsControllerIT {
             return objectMapper.readValue(response.getContentAsString(), Integer.class);
         }
 
+        public Integer createByDescription(String description) throws Exception {
+
+            LOGGER.debug("MOCK_MVC createByDescription({})", description);
+            String json = objectMapper.writeValueAsString(description);
+            MockHttpServletResponse response =
+                    mockMvc.perform(post(PROJECTS_ENDPOINT + "/addByDescription")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(json)
+                            .accept(MediaType.APPLICATION_JSON)
+                    ).andExpect(status().isOk())
+                            .andReturn().getResponse();
+            return objectMapper.readValue(response.getContentAsString(), Integer.class);
+        }
+
         public Optional<Projects> findById(Integer projectId) throws Exception {
 
             LOGGER.debug("MOCK_MVC findById({})", projectId);
@@ -163,5 +270,19 @@ class ProjectsControllerIT {
                             .andReturn().getResponse();
             return objectMapper.readValue(response.getContentAsString(), Integer.class);
         }
+
+        private int delete(Integer projectId) throws Exception {
+
+            LOGGER.debug("MOCK_MVC delete(id:{})", projectId);
+            MockHttpServletResponse response = mockMvc.perform(
+                    MockMvcRequestBuilders.delete(new StringBuilder(PROJECTS_ENDPOINT).append("/delete/")
+                            .append(projectId).toString())
+                            .accept(MediaType.APPLICATION_JSON)
+            ).andExpect(status().isOk())
+                    .andReturn().getResponse();
+
+            return objectMapper.readValue(response.getContentAsString(), Integer.class);
+        }
+
     }
 }

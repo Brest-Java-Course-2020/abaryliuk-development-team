@@ -9,6 +9,13 @@ import java.util.List;
 public class ErrorResponse {
 
     /**
+     * Constructor without arguments.
+     */
+    public ErrorResponse() {
+        super();
+    }
+
+    /**
      * Constructor with arguments: String message, List<String> details.
      */
     public ErrorResponse(String message, List<String> details) {
