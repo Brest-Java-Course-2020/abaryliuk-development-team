@@ -94,7 +94,7 @@ public class ProjectJdbcDaoImpl implements ProjectsJdbcDao {
     public Integer create(Projects project) {
 
         if (!isNameUnique(project)) {
-            throw new IllegalArgumentException("Department with the same name already exsists in DB.");
+            throw new IllegalArgumentException("Project with same description already exist.");
         }
         parameterSource.addValue(DESCRIPTION, project.getDescription());
         parameterSource.addValue(DATEADDED, project.getDateAdded());

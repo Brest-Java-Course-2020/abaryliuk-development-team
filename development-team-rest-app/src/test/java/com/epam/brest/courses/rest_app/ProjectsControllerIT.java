@@ -3,7 +3,6 @@ package com.epam.brest.courses.rest_app;
 import com.epam.brest.courses.model.Projects;
 import com.epam.brest.courses.rest_app.exception.ErrorResponse;
 import com.epam.brest.courses.rest_app.exception.projectsException.CustomExceptionHandler;
-import com.epam.brest.courses.service.ProjectsServiceImpl;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -146,7 +145,7 @@ class ProjectsControllerIT {
 
         // then
         assertTrue(1 ==result);
-        assertFalse(projectsOptionalAfterUpdate.get().getDescription() ==project.getDescription());
+        assertFalse(projectsOptionalAfterUpdate.get().getDescription() == project.getDescription());
     }
 
     @Test
@@ -231,6 +230,7 @@ class ProjectsControllerIT {
                             .accept(MediaType.APPLICATION_JSON)
                     ).andExpect(status().isOk())
                             .andReturn().getResponse();
+
             return objectMapper.readValue(response.getContentAsString(), Integer.class);
         }
 
@@ -275,8 +275,8 @@ class ProjectsControllerIT {
 
             LOGGER.debug("MOCK_MVC delete(id:{})", projectId);
             MockHttpServletResponse response = mockMvc.perform(
-                    MockMvcRequestBuilders.delete(new StringBuilder(PROJECTS_ENDPOINT).append("/delete/")
-                            .append(projectId).toString())
+                    MockMvcRequestBuilders.delete(new StringBuilder(PROJECTS_ENDPOINT).append("/delete/").append(projectId)
+                            .toString())
                             .accept(MediaType.APPLICATION_JSON)
             ).andExpect(status().isOk())
                     .andReturn().getResponse();

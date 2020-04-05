@@ -10,6 +10,6 @@ public class ProjectsNotFoundException extends RuntimeException {
      * Constructor with argument Integer id.
      */
     public ProjectsNotFoundException(Integer id) {
-        super("Project id not found : " + id);
+        super("Project not found for id: " + id);
     }
 }

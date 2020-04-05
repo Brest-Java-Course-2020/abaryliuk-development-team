@@ -38,9 +38,9 @@
         <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>
 
-    <bean id="projectsServiceDto" class="com.epam.brest.courses.service.ProjectsDtoServiceImpl">
-        <constructor-arg ref="projectsDaoDto"/>
-    </bean>
+<!--    <bean id="projectsServiceDto" class="com.epam.brest.courses.service.ProjectsDtoServiceImpl">-->
+<!--        <constructor-arg ref="projectsDaoDto"/>-->
+<!--    </bean>-->
 
     <bean id="projectsDaoDto" class="com.epam.brest.courses.daoImpl.ProjectJdbcDaoDtoImpl">
         <constructor-arg ref="namedParameterJdbcTemplate"/>

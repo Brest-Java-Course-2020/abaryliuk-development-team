@@ -1,6 +1,10 @@
 package com.epam.brest.courses.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -13,6 +17,9 @@ import java.time.LocalDate;
         , justification = "I prefer to suppress these FindBugs warnings")
 public class ProjectsDto {
 
+
+    public ProjectsDto() {
+    }
 
     /**
      * Project id.
@@ -28,6 +35,8 @@ public class ProjectsDto {
      * Date adding of project.
      */
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate dateAdded;
 
     /**
