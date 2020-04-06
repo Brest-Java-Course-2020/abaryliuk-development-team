@@ -40,8 +40,10 @@ public class Developers {
      *
      * @param developerId Developer's id.
      */
-    public final void setDeveloperId(Integer developerId) {
+    public final Developers setDeveloperId(Integer developerId)
+    {
         this.developerId = developerId;
+        return this;
     }
 
 
@@ -59,8 +61,9 @@ public class Developers {
      *
      * @param firstName Developer's firstName.
      */
-    public final void setFirstName(String firstName) {
+    public final Developers setFirstName(String firstName) {
         this.firstName = firstName;
+        return this;
     }
 
 
@@ -78,8 +81,9 @@ public class Developers {
      *
      * @param lastName Developer's lastName.
      */
-    public final void setLastName(String lastName) {
+    public final Developers setLastName(String lastName) {
         this.lastName = lastName;
+        return this;
     }
 
     /**

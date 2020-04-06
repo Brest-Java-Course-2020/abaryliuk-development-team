@@ -81,3 +81,45 @@ curl --location --request DELETE 'http://localhost:8080/projects/delete/1'
 ```
 curl --location --request GET 'http://localhost:8080/projectsDto/?dateStart=2020-01-01&dateEnd=2020-03-01'
 ```
+
+###findAll
+
+```
+curl --location --request GET 'http://localhost:8080/projectsDto/findAll'
+```
+
+##DevelopersController
+
+###findAll
+
+```
+curl --location --request GET 'http://localhost:8080/developers'
+```
+
+### findById
+
+```
+curl --location --request GET 'http://localhost:8080/developers/1'
+```
+
+###create
+
+```
+curl --location --request POST 'http://localhost:8080/developers' \
+--header 'Content-Type: application/json' \
+--data-raw '{"firstName":"Ivan","lastName":"Ivanov"}'
+```
+
+###update
+
+```
+curl --location --request PUT 'http://localhost:8080/developers' \
+--header 'Content-Type: application/json' \
+--data-raw '{"developerId":1,"firstName":"Test","lastName":"Test"}'
+```
+
+###delete
+
+```
+curl --location --request DELETE 'http://localhost:8080/developers/1'
+```

@@ -2,7 +2,7 @@ package com.epam.brest.courses.rest_app;
 
 import com.epam.brest.courses.model.Projects;
 import com.epam.brest.courses.model.dto.ProjectsDto;
-import com.epam.brest.courses.rest_app.exception.projectsException.CustomExceptionHandler;
+import com.epam.brest.courses.rest_app.exception.CustomExceptionHandler;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -66,7 +66,7 @@ class ProjectsDtoControllerIT {
     }
 
     @Test
-    void findBetweenDates() throws Exception {
+    void shouldFindBetweenDates() throws Exception {
 
         mockMvcProjects = MockMvcBuilders.standaloneSetup(projectsController)
                 .setMessageConverters(new MappingJackson2HttpMessageConverter())
@@ -89,7 +89,11 @@ class ProjectsDtoControllerIT {
     }
 
     @Test
-    void findAll() {
+    void shouldFindAllProjectsDto() throws Exception {
+
+        List<ProjectsDto> projectsDtoList = projectsDtoService.findAll();
+        assertNotNull(projectsDtoList);
+        assertTrue(projectsDtoList.size() > 0);
     }
 
 
@@ -97,9 +101,23 @@ class ProjectsDtoControllerIT {
 
         public List<ProjectsDto> findBetweenDates(LocalDate dateStart, LocalDate dateEnd) throws Exception {
 
-            LOGGER.debug("findBetweenDates({}, {})", dateStart, dateEnd);
+            LOGGER.debug("PROJECTS_DTO TEST findBetweenDates({}, {})", dateStart, dateEnd);
 
             MockHttpServletResponse response = mockMvcProjectsDto.perform(get(PROJECTS_ENDPOINT +"?dateStart="+dateStart+"&dateEnd="+dateEnd)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .accept(MediaType.APPLICATION_JSON)
+            ).andExpect(status().isOk())
+                    .andReturn().getResponse();
+            assertNotNull(response);
+
+            return objectMapper.readValue(response.getContentAsString(), new TypeReference<List<ProjectsDto>>() {
+            });
+        }
+
+        public List<ProjectsDto> findAll() throws Exception {
+
+            LOGGER.debug("PROJECTS_DTO TEST findAll()");
+            MockHttpServletResponse response = mockMvcProjectsDto.perform(get(PROJECTS_ENDPOINT +"/findAll")
                     .contentType(MediaType.APPLICATION_JSON)
                     .accept(MediaType.APPLICATION_JSON)
             ).andExpect(status().isOk())

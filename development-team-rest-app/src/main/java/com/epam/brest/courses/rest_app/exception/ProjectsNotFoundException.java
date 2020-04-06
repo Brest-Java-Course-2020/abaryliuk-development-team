@@ -1,4 +1,4 @@
-package com.epam.brest.courses.rest_app.exception.projectsException;
+package com.epam.brest.courses.rest_app.exception;
 
 
 /**

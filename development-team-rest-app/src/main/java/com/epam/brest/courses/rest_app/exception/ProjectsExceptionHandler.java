@@ -1,6 +1,5 @@
-package com.epam.brest.courses.rest_app.exception.developersException;
+package com.epam.brest.courses.rest_app.exception;
 
-import com.epam.brest.courses.rest_app.exception.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -11,10 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * DevelopersExceptionHandler
+ * ProjectsExceptionHandler
  */
-public class DevelopersExceptionHandler extends ResponseEntityExceptionHandler {
-
+public class ProjectsExceptionHandler extends ResponseEntityExceptionHandler {
 
     /**
      * String INCORRECT_REQUEST.
@@ -25,12 +23,12 @@ public class DevelopersExceptionHandler extends ResponseEntityExceptionHandler {
     /**
      * Returns new ResponseEntity<>(error, HttpStatus.NOT_FOUND).
      *
-     * @param ex DevelopersNotFoundException ex.
+     * @param ex ProjectsNotFoundException ex.
      * @param request WebRequest request.
      * @return new ResponseEntity<>(error, HttpStatus.NOT_FOUND).
      */
-    @ExceptionHandler(DevelopersNotFoundException.class)
-    public final ResponseEntity<ErrorResponse> handleDevelopersNotFoundException (DevelopersNotFoundException ex, WebRequest request) {
+    @ExceptionHandler(ProjectsNotFoundException.class)
+    public final ResponseEntity<ErrorResponse> handleProjectsNotFoundException (ProjectsNotFoundException ex, WebRequest request) {
         List<String> details = new ArrayList<>();
         details.add(ex.getLocalizedMessage());
         ErrorResponse error = new ErrorResponse(INCORRECT_REQUEST, details);

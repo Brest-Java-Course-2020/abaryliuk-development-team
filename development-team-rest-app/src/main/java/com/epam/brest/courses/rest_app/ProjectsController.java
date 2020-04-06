@@ -1,7 +1,7 @@
 package com.epam.brest.courses.rest_app;
 
 import com.epam.brest.courses.model.Projects;
-import com.epam.brest.courses.rest_app.exception.projectsException.ProjectsNotFoundException;
+import com.epam.brest.courses.rest_app.exception.ProjectsNotFoundException;
 import com.epam.brest.courses.service.ProjectsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,7 +84,7 @@ public class ProjectsController {
      *
      * @return new ResponseEntity.
      */
-    @PutMapping( consumes = {"application/json"}, produces = {"application/json"})
+    @PutMapping( consumes = "application/json", produces = "application/json")
     public ResponseEntity<Integer> updateProject(@RequestBody Projects project) {
 
         LOGGER.debug("updateProjectt({})", project);

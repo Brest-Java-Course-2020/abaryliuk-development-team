@@ -2,7 +2,7 @@ package com.epam.brest.courses.rest_app;
 
 import com.epam.brest.courses.model.Projects;
 import com.epam.brest.courses.rest_app.exception.ErrorResponse;
-import com.epam.brest.courses.rest_app.exception.projectsException.CustomExceptionHandler;
+import com.epam.brest.courses.rest_app.exception.CustomExceptionHandler;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -26,8 +26,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.epam.brest.courses.model.constants.ProjectConstants.PROJECT_DESCRIPTION_SIZE;
-import static com.epam.brest.courses.rest_app.exception.projectsException.CustomExceptionHandler.PROJECT_NOT_FOUND;
-import static com.epam.brest.courses.rest_app.exception.projectsException.CustomExceptionHandler.VALIDATION_ERROR;
+import static com.epam.brest.courses.rest_app.exception.CustomExceptionHandler.PROJECT_NOT_FOUND;
+import static com.epam.brest.courses.rest_app.exception.CustomExceptionHandler.VALIDATION_ERROR;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
