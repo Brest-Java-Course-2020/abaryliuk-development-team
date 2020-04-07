@@ -123,3 +123,21 @@ curl --location --request PUT 'http://localhost:8080/developers' \
 ```
 curl --location --request DELETE 'http://localhost:8080/developers/1'
 ```
+
+##Projects_DevelopersController
+
+###selectDevelopersFromProjects_Developers
+
+```
+curl --location --request GET 'http://localhost:8080/projects_developers/1'
+```
+###ddDeveloperToProjects_Developers
+
+```
+curl --location --request POST 'http://localhost:8080/projects_developers/1/9'
+```
+###deleteDeveloperFromProject_Developers
+
+```
+curl --location --request DELETE 'http://localhost:8080/projects_developers/1/9'
+```
