@@ -41,5 +41,5 @@ public interface Projects_DevelopersService {
      * @return developer
      */
 
-    Optional<Projects_Developers> findByIdFromProjects_Develoers(Integer projectId, Integer developerId);
+    Optional<Projects_Developers> findByIdFromProjects_Developers(Integer projectId, Integer developerId);
 }

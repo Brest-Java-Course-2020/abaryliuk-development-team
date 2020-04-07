@@ -50,10 +50,10 @@ private final Projects_DevelopersJdbcDao projects_developersJdbcDao;
     }
 
     @Override
-    public Optional<Projects_Developers> findByIdFromProjects_Develoers(Integer projectId, Integer developerId) {
+    public Optional<Projects_Developers> findByIdFromProjects_Developers(Integer projectId, Integer developerId) {
 
         LOGGER.debug("SERVICE findByIdFromProjects_Develoers(). Developer id = {}. ProjectId = {}", developerId, projectId);
-        Optional<Projects_Developers> projects_developersList = projects_developersJdbcDao.findByIdFromProjects_Develoers(projectId,developerId);
+        Optional<Projects_Developers> projects_developersList = projects_developersJdbcDao.findByIdFromProjects_Developers(projectId,developerId);
         return projects_developersList;
     }
 

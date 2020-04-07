@@ -180,7 +180,7 @@ class ProjectsControllerIT {
     @Test
     public void shouldFailOnCreateProjectWithDuplicateDescription() throws Exception {
 
-        LOGGER.debug("MOCK_MVC shouldFailOnCreateProjectWithDuplicateDescription()");
+        LOGGER.debug("shouldFailOnCreateProjectWithDuplicateDescription()");
         Projects project = new Projects()
                 .setDescription(RandomStringUtils.randomAlphabetic(PROJECT_DESCRIPTION_SIZE));
         Integer id = projectsService.create(project);
@@ -207,7 +207,7 @@ class ProjectsControllerIT {
 
         public List<Projects> findAll() throws Exception {
 
-            LOGGER.debug("MOCK_MVC findAll()");
+            LOGGER.debug("findAll()");
             MockHttpServletResponse response = mockMvc.perform(get(PROJECTS_ENDPOINT)
                     .accept(MediaType.APPLICATION_JSON)
             ).andExpect(status().isOk())
@@ -221,7 +221,7 @@ class ProjectsControllerIT {
 
         public Integer create(Projects project) throws Exception {
 
-            LOGGER.debug("MOCK_MVC create({})", project);
+            LOGGER.debug("create({})", project);
             String json = objectMapper.writeValueAsString(project);
             MockHttpServletResponse response =
                     mockMvc.perform(post(PROJECTS_ENDPOINT)
@@ -236,7 +236,7 @@ class ProjectsControllerIT {
 
         public Integer createByDescription(String description) throws Exception {
 
-            LOGGER.debug("MOCK_MVC createByDescription({})", description);
+            LOGGER.debug("createByDescription({})", description);
             String json = objectMapper.writeValueAsString(description);
             MockHttpServletResponse response =
                     mockMvc.perform(post(PROJECTS_ENDPOINT + "/addByDescription")
@@ -250,7 +250,7 @@ class ProjectsControllerIT {
 
         public Optional<Projects> findById(Integer projectId) throws Exception {
 
-            LOGGER.debug("MOCK_MVC findById({})", projectId);
+            LOGGER.debug("findById({})", projectId);
             MockHttpServletResponse response = mockMvc.perform(get(PROJECTS_ENDPOINT + "/" + projectId)
                     .accept(MediaType.APPLICATION_JSON)
             ).andExpect(status().isOk())
@@ -260,7 +260,7 @@ class ProjectsControllerIT {
 
         private int update(Projects project) throws Exception {
 
-            LOGGER.debug("MOCK_MVC update({})", project);
+            LOGGER.debug("update({})", project);
             MockHttpServletResponse response =
                     mockMvc.perform(put(PROJECTS_ENDPOINT)
                             .contentType(MediaType.APPLICATION_JSON)
@@ -273,7 +273,7 @@ class ProjectsControllerIT {
 
         private int delete(Integer projectId) throws Exception {
 
-            LOGGER.debug("MOCK_MVC delete(id:{})", projectId);
+            LOGGER.debug("delete(id:{})", projectId);
             MockHttpServletResponse response = mockMvc.perform(
                     MockMvcRequestBuilders.delete(new StringBuilder(PROJECTS_ENDPOINT).append("/delete/").append(projectId)
                             .toString())

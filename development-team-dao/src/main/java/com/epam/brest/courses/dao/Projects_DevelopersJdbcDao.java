@@ -41,6 +41,6 @@ public interface Projects_DevelopersJdbcDao {
      * @return developer
      */
 
-    Optional<Projects_Developers> findByIdFromProjects_Develoers(Integer projectId, Integer developerId);
+    Optional<Projects_Developers> findByIdFromProjects_Developers(Integer projectId, Integer developerId);
 }
 

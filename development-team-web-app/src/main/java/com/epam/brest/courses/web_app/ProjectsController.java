@@ -92,7 +92,7 @@ public class ProjectsController {
                                             ,@RequestParam(required = false) Integer developerId
                                             , Model model) {
 
-        if (developerId != null && !projects_developersService.findByIdFromProjects_Develoers(projectId,developerId).isPresent()){
+        if (developerId != null && !projects_developersService.findByIdFromProjects_Developers(projectId,developerId).isPresent()){
             LOGGER.debug("CONTROLLER - addDeveloperToProjects_Developers()");
             projects_developersService.addDeveloperToProjects_Developers(projectId,developerId);
         }

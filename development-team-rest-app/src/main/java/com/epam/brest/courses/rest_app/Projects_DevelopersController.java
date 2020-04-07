@@ -1,14 +1,17 @@
 package com.epam.brest.courses.rest_app;
 
 import com.epam.brest.courses.model.Developers;
+import com.epam.brest.courses.model.Projects_Developers;
 import com.epam.brest.courses.service.Projects_DevelopersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import sun.util.locale.LocaleObjectCache;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/projects_developers")
@@ -41,11 +44,11 @@ public class Projects_DevelopersController {
      *
      * @param projectId
      * @param developerId
-     * @return new ResponseEntity.
+     * @return ResponseEntity.
      */
     @PostMapping("/{projectId}/{developerId}")
     public ResponseEntity<Integer> addDeveloperToProjects_Developers(@PathVariable Integer projectId
-                                                    , @PathVariable Integer developerId){
+                                                                    ,@PathVariable Integer developerId){
 
         LOGGER.debug("addDeveloperToProjects_Developers({},{})", projectId,developerId);
 
@@ -53,14 +56,38 @@ public class Projects_DevelopersController {
         return new ResponseEntity(result, HttpStatus.OK);
     }
 
+    /**
+     * Delete developer from projects_developers.
+     *
+     * @param projectId
+     * @param developerId
+     * @return ResponseEntity.
+     */
     @DeleteMapping("/{projectId}/{developerId}")
     public ResponseEntity<Integer> deleteDeveloperFromProject_Developers(@PathVariable Integer projectId
-                                                        ,@PathVariable Integer developerId) {
+                                                                        ,@PathVariable Integer developerId) {
 
         LOGGER.debug("deleteDeveloperFromProject_Developers({},{})", projectId,developerId);
 
         Integer result = projects_developersService.deleteDeveloperFromProject_Developers(projectId,developerId);
         return new ResponseEntity(result,HttpStatus.OK);
+    }
+
+    /**
+     * Find by both id from projects_developers.
+     *
+     * @param projectId
+     * @param developerId
+     * @return  Optional<Projects_Developers> projects_developersList.
+     */
+    @GetMapping("/{projectId}/{developerId}")
+    public Optional<Projects_Developers> findByIdFromProjects_Developers(@PathVariable Integer projectId
+                                                                       ,@PathVariable Integer developerId) {
+
+        LOGGER.debug("findByIdFromProjects_Develoers({},{})",projectId,developerId);
+        Optional<Projects_Developers> projects_developersList = projects_developersService
+                                                                .findByIdFromProjects_Developers(projectId,developerId);
+        return projects_developersList;
     }
 
 }

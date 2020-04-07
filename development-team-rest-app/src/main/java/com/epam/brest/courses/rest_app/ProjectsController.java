@@ -60,6 +60,7 @@ public class ProjectsController {
      */
     @PostMapping(value = "/addByDescription", consumes = "application/json", produces = "application/json" )
     public Integer add(@RequestBody String description){
+
         Projects project = new Projects();
         LOGGER.debug("Add project {}", description);
         project.setDescription(description);

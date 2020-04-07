@@ -69,7 +69,7 @@ public class Projects_DevelopersJdbcDaoImpl implements Projects_DevelopersJdbcDa
     }
 
     @Override
-    public Optional<Projects_Developers> findByIdFromProjects_Develoers(Integer projectId, Integer developerId) {
+    public Optional<Projects_Developers> findByIdFromProjects_Developers(Integer projectId, Integer developerId) {
 
         LOGGER.debug("DAO. findByIdFromProjects_Develoers();");
         parameterSource.addValue("projectId", projectId);

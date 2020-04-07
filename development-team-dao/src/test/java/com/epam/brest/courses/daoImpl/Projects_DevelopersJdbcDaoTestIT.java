@@ -100,7 +100,8 @@ public class Projects_DevelopersJdbcDaoTestIT {
         newProject.setDescription(RandomStringUtils.randomAlphabetic(PROJECT_DESCRIPTION_SIZE));
         Integer projectId = projectJdbcDao.create(newProject);
         projects_developersJdbcDao.addDeveloperToProjects_Developers(projectId,developerId);
-        Optional<Projects_Developers> listFromProjects_Developers = projects_developersJdbcDao.findByIdFromProjects_Develoers(projectId,developerId);
+        Optional<Projects_Developers> listFromProjects_Developers = projects_developersJdbcDao
+                .findByIdFromProjects_Developers(projectId,developerId);
 
         assertTrue(listFromProjects_Developers.isPresent());
 //        assertEquals(projectId, developerFromProjects_Developers.get().getDeveloperId());
