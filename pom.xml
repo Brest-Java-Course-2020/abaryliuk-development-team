@@ -17,6 +17,7 @@
         <module>development-team-service</module>
         <module>development-team-rest-app</module>
         <module>development-team-web-app</module>
+        <module>development-team-service-rest</module>
     </modules>
 
 
@@ -74,6 +75,12 @@
             <dependency>
                 <groupId>com.epam.brest.courses</groupId>
                 <artifactId>development-team-web-app</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.epam.brest.courses</groupId>
+                <artifactId>development-team-service-rest</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -254,15 +261,6 @@
                     <groupId>org.eclipse.jetty</groupId>
                     <artifactId>jetty-maven-plugin</artifactId>
                     <version>9.4.26.v20200117</version>
-                    <configuration>
-                        <scanIntervalSeconds>10</scanIntervalSeconds>
-                        <webApp>
-                            <contextPath>/</contextPath>
-                        </webApp>
-                        <httpConnector>
-                            <port>8080</port>
-                        </httpConnector>
-                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>

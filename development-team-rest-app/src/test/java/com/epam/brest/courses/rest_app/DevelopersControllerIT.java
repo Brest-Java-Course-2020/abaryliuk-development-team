@@ -1,11 +1,10 @@
 package com.epam.brest.courses.rest_app;
 
 import com.epam.brest.courses.model.Developers;
-import com.epam.brest.courses.model.Projects;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 
 import org.junit.jupiter.api.Test;

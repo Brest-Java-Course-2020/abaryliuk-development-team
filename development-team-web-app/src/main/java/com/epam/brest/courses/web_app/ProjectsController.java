@@ -15,7 +15,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -73,9 +72,8 @@ public class ProjectsController {
     else{
 
          LOGGER.debug("Find all projects");
-         List<ProjectsDto> projectsDtoList =projectsDtoService.countOfDevelopers();
-         LOGGER.debug("Date = {}",projectsDtoList.get(0).getDateAdded() );
 
+         List<ProjectsDto> projectsDtoList = projectsDtoService.countOfDevelopers();
          model.addAttribute("projects", projectsDtoList );
     }
 
@@ -169,7 +167,7 @@ public class ProjectsController {
                 this.projectsService.create(project);
             }
                 catch (IllegalArgumentException ie){
-                    result.rejectValue("description", "projectDescription.exist");;
+                    result.rejectValue("description", "projectDescription.exist");
                     return "projectAdd";
                 }
 
