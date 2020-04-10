@@ -161,9 +161,8 @@ class ProjectsServiceRestIT {
 
         //given
         Integer id = 1;
-        Projects project = create(id);
 
-        mockServer.expect(ExpectedCount.once(), requestTo(new URI(PROJECTS_URL+ id)))
+        mockServer.expect(ExpectedCount.once(), requestTo(new URI(PROJECTS_URL + id)))
                 .andExpect(method(HttpMethod.DELETE))
                 .andRespond(withStatus(HttpStatus.OK)
                         .contentType(MediaType.APPLICATION_JSON)
