@@ -85,7 +85,7 @@ public class ProjectsController {
      *
      * @return new ResponseEntity.
      */
-    @PutMapping( consumes = "application/json", produces = "application/json")
+    @PutMapping(consumes = "application/json", produces = "application/json")
     public ResponseEntity<Integer> updateProject(@RequestBody Projects project) {
 
         LOGGER.debug("updateProjectt({})", project);
