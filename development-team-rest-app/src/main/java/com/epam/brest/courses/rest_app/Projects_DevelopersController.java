@@ -84,9 +84,9 @@ public class Projects_DevelopersController {
                                                                        ,@PathVariable Integer developerId) {
 
         LOGGER.debug("findByIdFromProjects_Develoers({},{})",projectId,developerId);
-        Optional<Projects_Developers> projects_developersList = projects_developersService
+        Optional<Projects_Developers> projects_developers = projects_developersService
                                                                 .findByIdFromProjects_Developers(projectId,developerId);
-        return projects_developersList;
+        return projects_developers;
     }
 
 }

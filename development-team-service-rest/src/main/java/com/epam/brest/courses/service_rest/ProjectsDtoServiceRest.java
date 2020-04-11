@@ -38,7 +38,6 @@ public class ProjectsDtoServiceRest implements ProjectsDtoService {
                 .queryParam("dateEnd", dateEnd);
         HttpEntity<?> entity = new HttpEntity<>(headers);
 
-
         ResponseEntity<List> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, List.class);
         return  response.getBody();
     }
