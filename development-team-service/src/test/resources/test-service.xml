@@ -6,8 +6,8 @@
 
     <bean id="developers" class="com.epam.brest.courses.model.Developers"/>
 
-    <bean id="projects" class="com.epam.brest.courses.model.Projects" scope="prototype">
-    </bean>
+    <bean id="projects" class="com.epam.brest.courses.model.Projects" scope="prototype"/>
+
 
     <bean id="developersService" class="com.epam.brest.courses.service.DevelopersServiceImpl">
         <constructor-arg ref="developersDao"/>

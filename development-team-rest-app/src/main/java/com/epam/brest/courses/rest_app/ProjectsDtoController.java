@@ -21,7 +21,7 @@ public class ProjectsDtoController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProjectsDtoController.class);
 
-    final ProjectsDtoService projectsDtoService;
+   private final ProjectsDtoService projectsDtoService;
 
     public ProjectsDtoController(ProjectsDtoService projectsDtoService) {
         this.projectsDtoService = projectsDtoService;

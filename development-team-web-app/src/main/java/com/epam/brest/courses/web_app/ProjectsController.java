@@ -47,7 +47,6 @@ public class ProjectsController {
         this.projects_developersService = projects_developersService;
     }
 
-
         @Autowired
         ProjectsValidator projectsValidator;
 
@@ -90,9 +89,10 @@ public class ProjectsController {
                                             ,@RequestParam(required = false) Integer developerId
                                             , Model model) {
 
-        if (developerId != null && !projects_developersService.findByIdFromProjects_Developers(projectId,developerId).isPresent()){
-            LOGGER.debug("CONTROLLER - addDeveloperToProjects_Developers()");
-            projects_developersService.addDeveloperToProjects_Developers(projectId,developerId);
+        if (developerId != null && projects_developersService.findByIdFromProjects_Developers(projectId, developerId).get().getProjectId() == null) {
+
+            projects_developersService.addDeveloperToProjects_Developers(projectId, developerId);
+            LOGGER.debug("Developer with developerId = {} added to projects_developers", developerId);
         }
 
         LOGGER.debug("CONTROLLER - gotoEditProjectsPage({},{})", projectId, model);

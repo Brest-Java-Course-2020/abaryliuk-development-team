@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 import java.util.Optional;
 
+
+
 @RestController
 @RequestMapping("/projects_developers")
 public class Projects_DevelopersController {
@@ -49,7 +51,7 @@ public class Projects_DevelopersController {
     public ResponseEntity<Integer> addDeveloperToProjects_Developers(@PathVariable Integer projectId
                                                                     ,@PathVariable Integer developerId){
 
-        LOGGER.debug("addDeveloperToProjects_Developers({},{})", projectId,developerId);
+        LOGGER.debug("RESTaddDeveloperToProjects_Developers({},{})", projectId,developerId);
 
         Integer result = projects_developersService.addDeveloperToProjects_Developers(projectId,developerId);
         return new ResponseEntity(result, HttpStatus.OK);
@@ -80,13 +82,17 @@ public class Projects_DevelopersController {
      * @return  Optional<Projects_Developers> projects_developersList.
      */
     @GetMapping("/{projectId}/{developerId}")
-    public Optional<Projects_Developers> findByIdFromProjects_Developers(@PathVariable Integer projectId
-                                                                       ,@PathVariable Integer developerId) {
+    public ResponseEntity<Projects_Developers> findByIdFromProjects_Developers(@PathVariable Integer projectId
+                                                                       , @PathVariable Integer developerId) {
 
         LOGGER.debug("findByIdFromProjects_Develoers({},{})",projectId,developerId);
-        Optional<Projects_Developers> projects_developers = projects_developersService
+        Optional<Projects_Developers> projects_developer = projects_developersService
                                                                 .findByIdFromProjects_Developers(projectId,developerId);
-        return projects_developers;
+        LOGGER.debug("______PROJECTS_DEVELOPERS______({})",projects_developer);
+        return projects_developer.isPresent()
+                ?new ResponseEntity<>(projects_developer.get(),HttpStatus.OK)
+                :new ResponseEntity(Optional.empty() ,HttpStatus.OK);
+
     }
 
 }

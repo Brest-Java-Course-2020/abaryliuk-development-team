@@ -137,7 +137,7 @@ class Projects_DevelopersControllerIT {
     @Test
     void deleteDeveloperFromProject_Developers() throws Exception {
 
-        LOGGER.debug("addDeveloperToProjects_Developers()");
+        LOGGER.debug("deleteDeveloperFromProject_Developers()");
         Projects project = new Projects()
                 .setDescription(RandomStringUtils.randomAlphabetic(PROJECT_DESCRIPTION_SIZE));
         Integer projectId = projectsService.create(project);
@@ -148,6 +148,7 @@ class Projects_DevelopersControllerIT {
                 .setLastName(RandomStringUtils.randomAlphabetic(LASTNAME_SIZE));
         Integer developerId = developersService.create(developer);
         assertNotNull(developerId);
+        projects_developersService.addDeveloperToProjects_Developers(projectId,developerId);
 
         int result = projects_developersService.deleteDeveloperFromProject_Developers(projectId, developerId);
 

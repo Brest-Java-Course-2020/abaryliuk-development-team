@@ -71,7 +71,7 @@ public class ProjectsServiceRest implements ProjectsService {
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         HttpEntity<Projects> entity = new HttpEntity<>(headers);
         ResponseEntity<Integer> result =
-                restTemplate.exchange(url + projectId, HttpMethod.DELETE, entity, Integer.class);
+                restTemplate.exchange(url + "/delete/" +  projectId, HttpMethod.DELETE, entity, Integer.class);
         return result.getBody();
     }
 }

@@ -53,8 +53,8 @@ private final Projects_DevelopersJdbcDao projects_developersJdbcDao;
     public Optional<Projects_Developers> findByIdFromProjects_Developers(Integer projectId, Integer developerId) {
 
         LOGGER.debug("SERVICE findByIdFromProjects_Develoers(). Developer id = {}. ProjectId = {}", developerId, projectId);
-        Optional<Projects_Developers> projects_developersList = projects_developersJdbcDao.findByIdFromProjects_Developers(projectId,developerId);
-        return projects_developersList;
+        Optional<Projects_Developers> projects_developers = projects_developersJdbcDao.findByIdFromProjects_Developers(projectId,developerId);
+        return projects_developers;
     }
 
 

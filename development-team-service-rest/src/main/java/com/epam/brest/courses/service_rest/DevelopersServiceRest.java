@@ -38,7 +38,7 @@ public class DevelopersServiceRest implements DevelopersService {
 
         LOGGER.debug("findById({})", developerId);
 
-        ResponseEntity<Developers> responseEntity = restTemplate.getForEntity(url + "/" + developerId,Developers.class);
+        ResponseEntity<Developers> responseEntity = restTemplate.getForEntity(url + "/" + developerId, Developers.class);
 
         return Optional.ofNullable(responseEntity.getBody());
     }
@@ -73,7 +73,7 @@ public class DevelopersServiceRest implements DevelopersService {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         HttpEntity<Integer> entity = new HttpEntity<>(developerId,headers);
-        ResponseEntity responseEntity = restTemplate.exchange(url + developerId, HttpMethod.DELETE,entity,Integer.class);
+        ResponseEntity responseEntity = restTemplate.exchange(url +"/" + developerId, HttpMethod.DELETE,entity,Integer.class);
 
         return (Integer) responseEntity.getBody();
     }
