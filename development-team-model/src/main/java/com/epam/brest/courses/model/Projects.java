@@ -17,11 +17,6 @@ import java.time.LocalDate;
 @SuppressFBWarnings(value = { "EI_EXPOSE_REP", "EI_EXPOSE_REP2" }
                     , justification = "I prefer to suppress these FindBugs warnings")
 public class Projects {
-    public Projects(Integer projectId, String description, LocalDate dateAdded) {
-        this.projectId = projectId;
-        this.description = description;
-        this.dateAdded = dateAdded;
-    }
 
     /**
      * Constructor without arguments.
@@ -29,6 +24,18 @@ public class Projects {
 
     public Projects() {
         this.dateAdded=LocalDate.now();
+    }
+
+    /**
+     * Constructor with arguments
+     * @param projectId
+     * @param description
+     * @param dateAdded
+     */
+    public Projects(Integer projectId, String description, LocalDate dateAdded) {
+        this.projectId = projectId;
+        this.description = description;
+        this.dateAdded = dateAdded;
     }
 
     /**
@@ -55,7 +62,7 @@ public class Projects {
      *
      * @return projectId Project Id.
      */
-    public final Integer getProjectId() {
+    public Integer getProjectId() {
         return projectId;
     }
 
@@ -64,7 +71,7 @@ public class Projects {
      *
      * @param projectId Project's Id.
      */
-    public final Projects setProjectId(Integer projectId) {
+    public Projects setProjectId(Integer projectId) {
         this.projectId = projectId;
         return this;
     }
@@ -74,7 +81,7 @@ public class Projects {
      *
      * @return description Project description.
      */
-    public final String getDescription() {
+    public String getDescription() {
         return description;
     }
 
@@ -84,7 +91,7 @@ public class Projects {
      *
      * @param description Project description.
      */
-    public final Projects setDescription(String description) {
+    public Projects setDescription(String description) {
         this.description = description;
         return this;
     }
@@ -95,7 +102,7 @@ public class Projects {
      * @return dateAdded Project add date.
      */
     @JsonFormat(pattern = "yyyy-MM-dd")
-    public final LocalDate getDateAdded() {
+    public LocalDate getDateAdded() {
         return dateAdded;
     }
 
@@ -113,7 +120,7 @@ public class Projects {
      * {@inheritDoc}
      */
     @Override
-    public final String toString() {
+    public String toString() {
         return "Project{"
                 + "progectId=" + projectId
                 + ", description='" + description + '\''

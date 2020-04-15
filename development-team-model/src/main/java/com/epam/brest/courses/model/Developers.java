@@ -31,7 +31,7 @@ public class Developers {
      *
      * @return developerId Developer's id.
      */
-    public final Integer getDeveloperId() {
+    public Integer getDeveloperId() {
         return developerId;
     }
 
@@ -40,7 +40,7 @@ public class Developers {
      *
      * @param developerId Developer's id.
      */
-    public final Developers setDeveloperId(Integer developerId)
+    public Developers setDeveloperId(Integer developerId)
     {
         this.developerId = developerId;
         return this;
@@ -52,7 +52,7 @@ public class Developers {
      *
      * @return developerId Developer's firstName.
      */
-    public final String getFirstName() {
+    public String getFirstName() {
         return firstName;
     }
 
@@ -61,7 +61,7 @@ public class Developers {
      *
      * @param firstName Developer's firstName.
      */
-    public final Developers setFirstName(String firstName) {
+    public Developers setFirstName(String firstName) {
         this.firstName = firstName;
         return this;
     }
@@ -72,7 +72,7 @@ public class Developers {
      *
      * @return lastName Developer's lastName.
      */
-    public final String getLastName() {
+    public String getLastName() {
         return lastName;
     }
 
@@ -81,7 +81,7 @@ public class Developers {
      *
      * @param lastName Developer's lastName.
      */
-    public final Developers setLastName(String lastName) {
+    public Developers setLastName(String lastName) {
         this.lastName = lastName;
         return this;
     }
@@ -92,7 +92,7 @@ public class Developers {
      * @return description Developer's description.
      */
     @Override
-    public final String toString() {
+    public String toString() {
         return "Developers{"
                 + "developerId=" + developerId
                 + ", firstName='" + firstName + '\''

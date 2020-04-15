@@ -21,13 +21,11 @@
     <!-- Component scan for @Controller, @Service... annotations -->
     <context:component-scan base-package="com.epam.brest.courses.web_app"/>
 
-<!--    <import resource="classpath*:test-db.xml"/>-->
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
                 <value>classpath:application.properties</value>
-<!--                <value>classpath:sql-development-team.properties</value>-->
             </list>
         </property>
     </bean>
@@ -73,25 +71,6 @@
         </property>
     </bean>
 
-<!--    <bean id="projects_developerDao" class="com.epam.brest.courses.daoImpl.Projects_DevelopersJdbcDaoImpl">-->
-<!--        <constructor-arg ref="namedParameterJdbcTemplate"/>-->
-<!--    </bean>-->
-
-<!--    <bean id="developerDao" class="com.epam.brest.courses.daoImpl.DevelopersJdbcDaoImpl">-->
-<!--        <constructor-arg ref="namedParameterJdbcTemplate"/>-->
-<!--    </bean>-->
-
-<!--    <bean id="projectDao" class="com.epam.brest.courses.daoImpl.ProjectJdbcDaoImpl">-->
-<!--        <constructor-arg ref="namedParameterJdbcTemplate"/>-->
-<!--    </bean>-->
-
-<!--    <bean id="projectDtoDao" class="com.epam.brest.courses.daoImpl.ProjectJdbcDaoDtoImpl">-->
-<!--        <constructor-arg ref="namedParameterJdbcTemplate"/>-->
-<!--    </bean>-->
-
-<!--    <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">-->
-<!--        <constructor-arg name="dataSource" ref="dataSource"/>-->
-<!--    </bean>-->
 
     <!-- Thymeleaf Template Resolver -->
     <bean id="templateResolver"

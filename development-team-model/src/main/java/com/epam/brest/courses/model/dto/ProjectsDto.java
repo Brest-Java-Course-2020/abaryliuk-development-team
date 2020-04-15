@@ -49,7 +49,7 @@ public class ProjectsDto {
      *      *
      *      * @return projectId Project Id.
      */
-    public final Integer getProjectId() {
+    public Integer getProjectId() {
         return projectId;
     }
 
@@ -58,7 +58,7 @@ public class ProjectsDto {
      *
      * @param projectId Project Id.
      */
-    public final void setProjectId(final Integer projectId) {
+    public  void setProjectId( Integer projectId) {
         this.projectId = projectId;
     }
 
@@ -73,7 +73,7 @@ public class ProjectsDto {
      * @return dateAdded Project add date.
      */
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    public final LocalDate getDateAdded() {
+    public  LocalDate getDateAdded() {
         return dateAdded;
     }
     /**
@@ -81,7 +81,7 @@ public class ProjectsDto {
      *
      * @return description Project description.
      */
-    public final String getDescription() {
+    public  String getDescription() {
         return description;
     }
 
@@ -91,7 +91,7 @@ public class ProjectsDto {
      *
      * @param description Project description.
      */
-    public final ProjectsDto setDescription(String description) {
+    public  ProjectsDto setDescription(String description) {
         this.description = description;
         return this;
     }
@@ -100,7 +100,7 @@ public class ProjectsDto {
      *
      * @return countOfDevelopers Project's count of developers.
      */
-    public final Integer getCountOfDevelopers() {
+    public  Integer getCountOfDevelopers() {
         return countOfDevelopers;
     }
 
@@ -109,7 +109,7 @@ public class ProjectsDto {
      *
      * @param countOfDevelopers Count of developers.
      */
-    public final void setCountOfDevelopers(final Integer countOfDevelopers) {
+    public  void setCountOfDevelopers( Integer countOfDevelopers) {
         this.countOfDevelopers = countOfDevelopers;
     }
 
@@ -117,7 +117,7 @@ public class ProjectsDto {
      * {@inheritDoc}
      */
     @Override
-    public final String toString() {
+    public  String toString() {
         return "ProjectsDto{"
                 + "projectId=" + projectId
                 + ", description='" + description + '\''
