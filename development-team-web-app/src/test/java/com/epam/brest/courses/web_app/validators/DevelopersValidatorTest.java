@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DevelopersValidatorTest {
 
-
     private Developers developer;
 
     private DevelopersValidator developersValidator = new DevelopersValidator();
@@ -107,6 +106,7 @@ class DevelopersValidatorTest {
         //then
         assertTrue(result.hasErrors());
     }
+
     @Test
     void shouldGetCorrectLastNameAndFirstName(){
 

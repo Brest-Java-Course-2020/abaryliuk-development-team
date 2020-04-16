@@ -66,8 +66,9 @@ public class DevelopersController {
      * @return view name
      */
     @PostMapping(value = "/{Id}")
-    public String updateDeveloper(@ModelAttribute("developer")@Valid Developers developer,
-                                BindingResult result){
+    public String updateDeveloper(@ModelAttribute("developer")
+                                 @Valid Developers developer
+                                 , BindingResult result){
 
         LOGGER.debug("updateDeveloper({}, {})", developer, result);
         developersValidator.validate(developer, result);
