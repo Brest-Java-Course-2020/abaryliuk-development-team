@@ -77,6 +77,7 @@ public class ProjectJdbcDaoImpl implements ProjectsJdbcDao {
     public Integer update(Projects project) {
 
         LOGGER.debug("Date = :      " + project.getDateAdded());
+        parameterSource.addValue(PROJECT_ID, project.getProjectId());
         parameterSource.addValue(DESCRIPTION, project.getDescription());
         parameterSource.addValue(DATEADDED, project.getDateAdded());
         return namedParameterJdbcTemplate.update(sqlUpdate, parameterSource);

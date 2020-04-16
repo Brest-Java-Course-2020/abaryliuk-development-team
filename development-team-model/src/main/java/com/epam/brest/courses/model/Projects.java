@@ -122,7 +122,7 @@ public class Projects {
     @Override
     public String toString() {
         return "Project{"
-                + "progectId=" + projectId
+                + "projectId=" + projectId
                 + ", description='" + description + '\''
                 + ", dateAdded=" + dateAdded
                 + '}';

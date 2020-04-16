@@ -58,8 +58,9 @@ public class ProjectsDto {
      *
      * @param projectId Project Id.
      */
-    public  void setProjectId( Integer projectId) {
+    public  ProjectsDto setProjectId( Integer projectId) {
         this.projectId = projectId;
+        return this;
     }
 
     public ProjectsDto setDateAdded(LocalDate dateAdded) {
@@ -109,8 +110,9 @@ public class ProjectsDto {
      *
      * @param countOfDevelopers Count of developers.
      */
-    public  void setCountOfDevelopers( Integer countOfDevelopers) {
+    public  ProjectsDto setCountOfDevelopers( Integer countOfDevelopers) {
         this.countOfDevelopers = countOfDevelopers;
+        return this;
     }
 
     /**

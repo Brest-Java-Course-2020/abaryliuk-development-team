@@ -59,14 +59,18 @@ public class ProjectsController {
      */
     @GetMapping
     public final String projects(
-                                 @RequestParam (value = "dateStart", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateStart,
-                                 @RequestParam (value = "dateEnd", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateEnd,
+                                 @RequestParam (value = "dateStart", required = false)
+                                 @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateStart,
+                                 @RequestParam (value = "dateEnd", required = false)
+                                 @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateEnd,
                                  Model model){
 
      if (dateStart!= null && dateEnd != null){
 
          LOGGER.debug("Find projects between dates. Date start = {}, Date End = {}", dateStart, dateEnd);
-         model.addAttribute("projects", projectsDtoService.findBetweenDates(dateStart, dateEnd));
+         List<ProjectsDto> projectsDtoListBetween = projectsDtoService.findBetweenDates(dateStart, dateEnd);
+                 LOGGER.debug("______________________ {}", projectsDtoListBetween);
+         model.addAttribute("projects", projectsDtoListBetween);
     }
     else{
 
@@ -141,7 +145,6 @@ public class ProjectsController {
 
         LOGGER.debug("gotoAddProjectPage({})", model);
         model.addAttribute("project", new Projects());
-        model.addAttribute("developerEntity", developer);
         return "projectAdd";
     }
 
@@ -201,7 +204,7 @@ public class ProjectsController {
 
         LOGGER.debug("delete({},{}{})", projectId, developerId, model);
         projects_developersService.deleteDeveloperFromProject_Developers(projectId,developerId);
-        return "redirect:/projects/"+projectId;
+        return "redirect:/projects/" + projectId;
     }
 
 }

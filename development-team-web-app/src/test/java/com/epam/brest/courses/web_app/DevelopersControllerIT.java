@@ -31,7 +31,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 class DevelopersControllerIT {
 
-private final String COMMON_URL = "/developers";
+    private final String COMMON_DEVELOPERS_URL = "/developers";
+
     @Autowired
     private WebApplicationContext wac;
 
@@ -45,7 +46,7 @@ private final String COMMON_URL = "/developers";
     @Test
    public void shouldReturnDevelopersPage() throws Exception {
         mockMvc.perform(
-                MockMvcRequestBuilders.get(COMMON_URL)
+                MockMvcRequestBuilders.get(COMMON_DEVELOPERS_URL)
         ).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("text/html;charset=UTF-8"))
@@ -71,7 +72,7 @@ private final String COMMON_URL = "/developers";
     public void shouldOpenEditDeveloperPageById() throws Exception {
 
         mockMvc.perform(
-                MockMvcRequestBuilders.get(COMMON_URL + "/1")
+                MockMvcRequestBuilders.get(COMMON_DEVELOPERS_URL + "/1")
         ).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("text/html;charset=UTF-8"))
@@ -104,21 +105,21 @@ private final String COMMON_URL = "/developers";
         Developers developer = create(1);
 
         mockMvc.perform(
-                MockMvcRequestBuilders.post(COMMON_URL + "/1")
+                MockMvcRequestBuilders.post(COMMON_DEVELOPERS_URL + "/1")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                         .param("developerId", String.valueOf(developer.getDeveloperId()))
                         .param("firstName", developer.getFirstName())
                         .param("lastName", developer.getLastName())
                         .sessionAttr("developer", developer)
         ).andExpect(status().isFound())
-                .andExpect(view().name("redirect:" + COMMON_URL))
-                .andExpect(redirectedUrl(COMMON_URL));
+                .andExpect(view().name("redirect:" + COMMON_DEVELOPERS_URL))
+                .andExpect(redirectedUrl(COMMON_DEVELOPERS_URL));
     }
 
     @Test
     public void shouldOpenNewDeveloperPage() throws Exception {
         mockMvc.perform(
-                MockMvcRequestBuilders.get(COMMON_URL + "/developer")
+                MockMvcRequestBuilders.get(COMMON_DEVELOPERS_URL + "/developer")
         ).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("text/html;charset=UTF-8"))
@@ -133,14 +134,14 @@ private final String COMMON_URL = "/developers";
         Developers developer = create(1);
 
         mockMvc.perform(
-                MockMvcRequestBuilders.post(COMMON_URL + "/developer")
+                MockMvcRequestBuilders.post(COMMON_DEVELOPERS_URL + "/developer")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                         .param("firstName", developer.getFirstName())
                         .param("lastName", developer.getLastName())
                         .sessionAttr("developer", developer)
         ).andExpect(status().isFound())
-                .andExpect(view().name("redirect:" + COMMON_URL))
-                .andExpect(redirectedUrl(COMMON_URL));
+                .andExpect(view().name("redirect:" + COMMON_DEVELOPERS_URL))
+                .andExpect(redirectedUrl(COMMON_DEVELOPERS_URL));
     }
 
 
@@ -148,10 +149,10 @@ private final String COMMON_URL = "/developers";
     public void shouldDeleteDeveloper() throws Exception {
 
         mockMvc.perform(
-                MockMvcRequestBuilders.get(COMMON_URL + "/2/delete")
+                MockMvcRequestBuilders.get(COMMON_DEVELOPERS_URL + "/2/delete")
         ).andExpect(status().isFound())
-                .andExpect(view().name("redirect:" + COMMON_URL))
-                .andExpect(redirectedUrl(COMMON_URL));
+                .andExpect(view().name("redirect:" + COMMON_DEVELOPERS_URL))
+                .andExpect(redirectedUrl(COMMON_DEVELOPERS_URL));
     }
 
     private Developers create(int index){
