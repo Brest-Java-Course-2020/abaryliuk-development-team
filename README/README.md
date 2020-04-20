@@ -2,26 +2,43 @@
 # abaryliuk-development-team
 
 Development team demo application
-
++ ##### How build
++ ##### Build project 
++ ##### Rest server
+  + ##### Available REST endpoints 
+    + ##### Test
+        + Test controller
+    + ##### Projects
+        + findAll
+        + create
+        + create by description
+        + update
+        + delete
+    + ##### ProjectsDtoController
+        + findBetweenDates
+        + findAll
+    + ##### DevelopersController
+        + findAll
+        + findById
+        + create
+        + update
+        + update
+        + delete
+    + ##### Projects_DevelopersController
+        + selectDevelopersFromProjects_Developers
+        + addDeveloperToProjects_Developers
+        + deleteDeveloperFromProject_Developers
 ## How build
-Setup java 8 and Maven, see [enviroment_setup.md](enviroment_setup.md) 
+Setup java 8 and Maven, see [enviroment_setup.md](enviroment_setup.md "click") 
   
       
 ## Build project 
-Goto Project folder and execute  
-    
-    mvn clean install
+1. Setup application using tomcat server [Using_tomcat_server](using_tomcat.md "click")
+
+2. Setup application using jetty server [Using_jetty_server](using_jetty.md "click")
+3. Setup application using jetty plugin [Using_jetty_plugin](using_jetty_plugin.md "click")
 
 ## Rest server
-
-### Start Rest using Maven Jetty plugin 
-    
-To start Rest using Maven Jetty plugin use:
-
-```
-cd development-team-rest-app
-mvn jetty:run
-```
 
 ## Available REST endpoints  
 
@@ -131,7 +148,7 @@ curl --location --request DELETE 'http://localhost:8080/developers/1'
 ```
 curl --location --request GET 'http://localhost:8080/projects_developers/1'
 ```
-###ddDeveloperToProjects_Developers
+###addDeveloperToProjects_Developers
 
 ```
 curl --location --request POST 'http://localhost:8080/projects_developers/1/9'

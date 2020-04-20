@@ -120,6 +120,7 @@
     </dependencies>
 
     <build>
+        <finalName>rest_app_DT</finalName>
         <plugins>
             <!-- Embedded Jetty HTTP Server for testing web application -->
             <plugin>
