@@ -1,4 +1,4 @@
-#Using jetty plugin
+# Using jetty plugin
 
 1. Start Rest using Maven Jetty plugin use:
 

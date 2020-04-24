@@ -72,8 +72,9 @@ public class DevelopersJdbcDaoImpl implements DevelopersJdbcDao {
 
         KeyHolder keyHolder = keyHolderFactory.newKeyHolder();
 
-        namedParameterJdbcTemplate.update(sqlAdd, parameterSource, keyHolder);
-        return  keyHolder.getKey().intValue();
+        Integer res = namedParameterJdbcTemplate.update(sqlAdd, parameterSource, keyHolder);
+        LOGGER.debug("Res = {} ", res);
+        return  (Integer) keyHolder.getKey();
     }
 
     @Override

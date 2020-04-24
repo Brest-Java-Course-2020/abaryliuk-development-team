@@ -9,9 +9,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.test.util.ReflectionTestUtils;
 import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,14 +25,13 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class DevelopersMockTest {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(DevelopersMockTest.class);
+
     @InjectMocks
     private DevelopersJdbcDaoImpl developersJdbcDao;
 
     @Mock
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-
-    @Mock
-    KeyHolderFactory keyHolderFactory;
 
 
     @AfterEach
@@ -78,21 +81,22 @@ public class DevelopersMockTest {
     @Test
     public void shouldCreateNewDeveloper(){
 
-//        Developers developer = newDeveloper();
-//        developer.setDeveloperId(null);
-//        String sql = "something";
-//        ReflectionTestUtils.setField(developersJdbcDao,"sqlAdd", sql);
-//
-//        KeyHolder keyHolder = mock(GeneratedKeyHolder.class);
-//        when(keyHolderFactory.newKeyHolder()).thenReturn(keyHolder);
-//
-//        when(keyHolder.getKey()).thenReturn(1);
-//
-//        when(namedParameterJdbcTemplate.update(anyString(), any(MapSqlParameterSource.class)
-//                ,any(KeyHolder.class))).thenReturn(1);
-//
-//        Integer id = developersJdbcDao.create(developer);
-//        assertNotNull(id );
+        Developers developer = newDeveloper();
+        developer.setDeveloperId(null);
+        String sql = "something";
+        ReflectionTestUtils.setField(developersJdbcDao,"sqlAdd", sql);
+
+        KeyHolder keyHolder = mock(GeneratedKeyHolder.class);
+
+        when(namedParameterJdbcTemplate.update(anyString(), any(MapSqlParameterSource.class)
+                ,any(KeyHolder.class))).thenReturn(0);
+
+        when((keyHolder.getKey())).thenReturn(1 );
+        LOGGER.debug("Id------ = {} ", keyHolder.getKey());
+
+        developersJdbcDao.create(developer);
+
+        assertEquals(1, keyHolder.getKey());
 
         }
 
