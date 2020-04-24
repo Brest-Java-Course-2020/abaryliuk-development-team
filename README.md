@@ -91,7 +91,7 @@ curl --location --request PUT 'http://localhost:8080/projects' \
 curl --location --request DELETE 'http://localhost:8080/projects/delete/1'
 ```
 
-##ProjectsDtoController
+## ProjectsDtoController
 
 ### findBetweenDates
 
@@ -99,15 +99,15 @@ curl --location --request DELETE 'http://localhost:8080/projects/delete/1'
 curl --location --request GET 'http://localhost:8080/projectsDto/?dateStart=2020-01-01&dateEnd=2020-03-01'
 ```
 
-###findAll
+### findAll
 
 ```
 curl --location --request GET 'http://localhost:8080/projectsDto/findAll'
 ```
 
-##DevelopersController
+## DevelopersController
 
-###findAll
+### findAll
 
 ```
 curl --location --request GET 'http://localhost:8080/developers'
@@ -119,7 +119,7 @@ curl --location --request GET 'http://localhost:8080/developers'
 curl --location --request GET 'http://localhost:8080/developers/1'
 ```
 
-###create
+### create
 
 ```
 curl --location --request POST 'http://localhost:8080/developers' \
@@ -127,7 +127,7 @@ curl --location --request POST 'http://localhost:8080/developers' \
 --data-raw '{"firstName":"Ivan","lastName":"Ivanov"}'
 ```
 
-###update
+### update
 
 ```
 curl --location --request PUT 'http://localhost:8080/developers' \
@@ -141,19 +141,19 @@ curl --location --request PUT 'http://localhost:8080/developers' \
 curl --location --request DELETE 'http://localhost:8080/developers/1'
 ```
 
-##Projects_DevelopersController
+## Projects_DevelopersController
 
-###selectDevelopersFromProjects_Developers
+### selectDevelopersFromProjects_Developers
 
 ```
 curl --location --request GET 'http://localhost:8080/projects_developers/1'
 ```
-###addDeveloperToProjects_Developers
+### addDeveloperToProjects_Developers
 
 ```
 curl --location --request POST 'http://localhost:8080/projects_developers/1/9'
 ```
-###deleteDeveloperFromProject_Developers
+### deleteDeveloperFromProject_Developers
 
 ```
 curl --location --request DELETE 'http://localhost:8080/projects_developers/1/9'
