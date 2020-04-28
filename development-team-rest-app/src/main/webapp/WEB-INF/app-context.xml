@@ -30,10 +30,6 @@
         </property>
     </bean>
 
-<!--    <bean id="projectsService" class="com.epam.brest.courses.service.ProjectsServiceImpl">-->
-<!--        <constructor-arg ref="projectsDao"/>-->
-<!--    </bean>-->
-
     <bean id="projects_developersDao" class="com.epam.brest.courses.daoImpl.Projects_DevelopersJdbcDaoImpl">
         <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>

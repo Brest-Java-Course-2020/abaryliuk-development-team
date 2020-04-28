@@ -2,7 +2,7 @@
 
 Goto Project folder and execute  
     
-    mvn clean install -Pjetty
+    mvn clean install -P jetty
     
 1. Create links to war files 
 ```

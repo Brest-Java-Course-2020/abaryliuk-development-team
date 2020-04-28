@@ -2,7 +2,7 @@
 
 Goto Project folder and execute  
     
-    mvn clean install
+    mvn clean install -P tomcat
    
 1.  Copy the war file from directory
  ```

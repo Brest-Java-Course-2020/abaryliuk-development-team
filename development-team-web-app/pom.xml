@@ -124,7 +124,7 @@
         <profile>
             <id>tomcat</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+
                 <property>
                     <name>DT</name>
                     <value>tomcat</value>
@@ -155,6 +155,24 @@
                 <point.projects_developers>jetty_rest/projects_developers</point.projects_developers>
             </properties>
         </profile>
+
+        <profile>
+            <id>jettyPlugin</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>DT</name>
+                    <value>jettyPlugin</value>
+                </property>
+            </activation>
+            <properties>
+                <port>8088</port>
+                <point.projects>projects</point.projects>
+                <point.projectsDto>projectsDto</point.projectsDto>
+                <point.developers>developers</point.developers>
+                <point.projects_developers>projects_developers</point.projects_developers>
+            </properties>
+        </profile>
     </profiles>
 
     <build>
@@ -175,11 +193,13 @@
                 <configuration>
                     <scanIntervalSeconds>10</scanIntervalSeconds>
                     <webApp>
-                        <contextPath>/abaryliuk-development-team</contextPath>
+                        <contextPath>/</contextPath>
                     </webApp>
                     <httpConnector>
                         <port>8080</port>
                     </httpConnector>
+
+
                 </configuration>
             </plugin>
         </plugins>
