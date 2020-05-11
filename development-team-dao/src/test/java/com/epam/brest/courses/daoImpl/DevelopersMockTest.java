@@ -1,6 +1,6 @@
 package com.epam.brest.courses.daoImpl;
 
-import com.epam.brest.courses.dao.KeyHolderFactory;
+
 import com.epam.brest.courses.model.Developers;
 import org.junit.Assert;
 
